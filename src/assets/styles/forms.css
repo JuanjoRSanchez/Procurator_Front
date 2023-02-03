@@ -1,0 +1,76 @@
+.form_box {
+    width: 50%;
+    min-width: 330px;
+    height: auto;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: rgb(196, 118, 54);
+
+
+}
+ .formPartido_box{
+    width: 70%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: rgb(196, 118, 54);
+ }
+
+.titleContainer {
+    text-align: center;
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+}
+
+.title {
+    color: aliceblue;
+
+}
+
+.form {
+    width: 80%;
+
+}
+
+.inputContainer {
+    width: 100%;
+    margin-top: 25px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    text-align: left;
+    color: aliceblue;
+
+}
+
+.label {
+    width: 100%;
+    /*border: 1px solid rgb(25, 0, 255);*/
+
+}
+
+.input {
+    width: 100%;
+    height: 25px;
+    text-align: left;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 0;
+
+}
+
+.btnContainer {
+    text-align: center;
+    margin-top: 20px;
+}

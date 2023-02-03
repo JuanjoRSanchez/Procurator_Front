@@ -1,0 +1,49 @@
+.body_header {
+    background-color: brown;
+    width: 100%;
+    min-width: 300px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+.img_boxHeader {
+    position: relative;
+    width: 13%;
+    min-width: 300px;
+    max-width: 450px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_boxHeader>a img {
+    width: 50%;
+    height: auto;
+    margin-left: 20%;
+}
+
+.use_box{
+    /*border: 1px solid rgb(40, 22, 201);*/
+    width: 20%;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.use_box > p {
+    color: white;;
+}
+.use_box > div {
+    width: auto;
+    height: 30px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;;
+}
