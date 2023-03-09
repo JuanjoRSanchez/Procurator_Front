@@ -3,8 +3,6 @@
     min-width: 330px;
     height: auto;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
     padding-bottom: 25px;
     display: flex;
     flex-wrap: wrap;
@@ -13,6 +11,10 @@
     background-color: rgb(196, 118, 54);
 
 
+}
+
+section{
+    color: aliceblue;
 }
  .formPartido_box{
     width: 70%;
@@ -74,3 +76,4 @@
     text-align: center;
     margin-top: 20px;
 }
+

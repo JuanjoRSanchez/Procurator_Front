@@ -1,49 +1,110 @@
 .body_header {
     background-color: brown;
     width: 100%;
-    min-width: 300px;
     height: 150px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
 }
 
 .img_boxHeader {
     position: relative;
-    width: 13%;
-    min-width: 300px;
+    width: 4%;
+    min-width: 170px;
     max-width: 450px;
-    height: auto;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
-.img_boxHeader>a img {
-    width: 50%;
+.img_boxHeader>a>img {
+    width: 70%;
     height: auto;
     margin-left: 20%;
 }
 
 .use_box{
-    /*border: 1px solid rgb(40, 22, 201);*/
-    width: 20%;
-    min-width: 80px;
+    width: 30%;
+    min-width: 100px;
+    height: 60px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
 }
-.use_box > p {
-    color: white;;
-}
-.use_box > div {
-    width: auto;
-    height: 30px;
-    padding: 10px;
+.use_box > div:first-child{
+    width: 100%;
+    min-width: 70px;
+    height: 60px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+}
+.user_boxGreetings{
+    width: 40%;
+    min-width: 100px;
+    height: 40px;
+    background-color: rgb(235, 165, 15);
+    color: aliceblue;
+    display: flex;
     justify-content: center;
-    background-color: white;;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+}
+
+.user_boxLogButton {
+    width: 10%;
+    min-width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_boxLogButton>button{
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+.user_boxLogButton>button>a{
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    color: black;
+}
+
+
+@media (max-width: 640px){
+    .body_header {
+        justify-content: space-around;
+       
+    }
+    .img_boxHeader>a img {
+        width: 70%;
+        height: auto;
+        margin-left: 20%;
+    }
+    .use_box{
+        min-width: 150px;
+        height: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+    .use_box > div:first-child{
+        border: 1px solid rgb(224, 11, 243);
+        width: 100%;
+        min-width: 70px;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
 }

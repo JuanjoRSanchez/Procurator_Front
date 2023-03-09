@@ -1,42 +1,81 @@
 import axios from "axios";
+import { Buffer } from 'buffer';
 
 const API_URL = "http://localhost:9011/api/v1/auth";
 
-const signUp =  (user) => {
+
+
+export function signUp(user) {
       axios.post(API_URL + "/register", JSON.stringify(user),
                 {
                     headers: {'Content-Type': 'application/json'},
                 }
                 ).then((response) => {
-                    console.log(response.data.token)
-                    localStorage.setItem("user", response.data.token);
+                    console.log(response)
+                    localStorage.setItem("userEmail", user.email)        
+                    localStorage.setItem("jwt", response.data.token)
+                    localStorage.setItem("userName", user.name);
                 }).catch((error) => {
                     console.log(error)
-                    return error;
-                });    
-                
-                
+                    return "error";
+                });               
 }
-    
-   
 
-const login = (name, password) => {
-    return axios
-        .post(API_URL + "/authenticate", {
-            name,
-            password
-        }).then((response) => {
-            if(response.data.token){
-                localStorage.setItem("user", response.data);
-            }
-            return response.data;
-        })
+export  function login (user) {
+    const response = axios.post(API_URL + "/authenticate", JSON.stringify(user),
+    {
+        headers: {'Content-Type': 'application/json'},
+    }
+    ).then((response) => {
+        localStorage.setItem("userEmail", user.email)        
+        localStorage.setItem("jwt", response.data.token)
+        localStorage.setItem("userName", response.data.userName);
+
+
+        response = response.data  
+    }).catch((error) => {
+        console.log("Error desde login: " +  error);
+        return error.response.status 
+    });
+    return response;
 }
+
+export  function  logout()  {
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("jwt")
+    localStorage.removeItem("userName")
+}
+
+ export function getTokenDate(token) {
+    const payloadBase64 = token.split('.')[1];
+    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+    const decoded = JSON.parse(decodedJson)
+    const exp = decoded.exp;
+    return exp;
+}
+
+export function isTokenExpired(token) {
+    const payloadBase64 = token.split('.')[1];
+    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+    const decoded = JSON.parse(decodedJson)
+    const exp = decoded.exp;
+    const expired = (Date.now() >= exp * 1000)
+    return expired
+  }
+
+export function isAuthenticated (){
+    let userName = localStorage.getItem("userName");
+    let jwt = localStorage.getItem("jwt")
+    let jwtCheck = isTokenExpired(jwt);
+    if(userName && jwtCheck){
+        return {"x-auth-token": jwt}
+    }else{
+        return {};
+    }
+ }
+
+
 /*
-const logout = () => {
-    localStorage.removeItem("user");
-}
-
 const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
  }
@@ -50,10 +89,13 @@ const getCurrentUser = () => {
     }
  }
 */
+/*
  const authService = {
     signUp,
     login,
-    
+    logout,
+    isTokenExpired,
+    getTokenDate
  }
-
- export default authService;
+*/
+ // export default authService;

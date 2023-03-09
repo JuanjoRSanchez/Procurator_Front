@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-//import userAuth from '../../Services/auth.services.js';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from "axios";
-
-import '../../assets/styles/forms.css'
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { login }from '../../../Services/auth.services.js';
+import { Link, useNavigate } from 'react-router-dom';
+import  AuthContext  from '../../../context/AuthProvider.js'
+import '../../../assets//styles/forms.css'
 
 
 export default function FormComponentLogin() {
-    //const { setAuth } = userAuth();
-    const API_URL = "http://localhost:9011/api/v1/auth";
-
+    const { setAuth } = useContext(AuthContext)
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/penas";
 
     const userRef = useRef();
     const errRef = useRef();
@@ -25,7 +20,10 @@ export default function FormComponentLogin() {
 
 
     useEffect(() => {
-        userRef.current.focus();
+        if(userRef != null){
+            userRef.current.focus();
+        }
+        
     }, [])
 
     useEffect(() => {
@@ -39,27 +37,21 @@ export default function FormComponentLogin() {
             email: userEmail,
             password: password
         }
-        axios.post(API_URL + "/authenticate", JSON.stringify(user),
-                {
-                    headers: {'Content-Type': 'application/json'},
-                }
-                ).then((response) => {
-                    console.log(response.data)    
-                    localStorage.setItem("userEmail", user.email)        
-                    localStorage.setItem("jwt", response.data.token)
-                    localStorage.setItem("userName", response.data.userName);
-                    
-                    navigate(from, { replace: true });
-                }).catch((error) => {
-                    console.log(error);
-                    setSucces(false);
-                });  
+        const res = await login(user);
+        if(res === "ok" ){    
+            setSucces(false);     
+            console.log(res)       
+        }else {
+            setAuth({res})
+            console.log(res) 
+            navigate("/collectives");
+        }        
     }
 
     return (
-        <div>
+        <div className='body_home'>
             {!succes ? (
-                <section>
+                <section className='body_error'>
                    <h2>Necesitas registrarte<br /></h2>
                     <span className='line'>
                         {/* */}
@@ -100,7 +92,6 @@ export default function FormComponentLogin() {
                         <div className="btnContainer">
                             <button type="submit" className="submitBtn" value="Actualizar" >Entrar</button>
                         </div>
-                        
                     </form>
                 </div>
             )}

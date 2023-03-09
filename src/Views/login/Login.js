@@ -1,18 +1,14 @@
 import React from 'react'
-import Header from '../../Components/header/Header.js'
-import Footer from '../../Components/footer/Footer.js'
-import FormComponentLogin from '../../Components/formComponentLogin/FormComponentLogin.js'
+import '../../assets/styles/principal.css'
+import '../home/Home.css'
+import FormComponentLogin from '../../Components/forms/formComponentLogin/FormComponentLogin.js'
 
 export default function Login() {
 
     return (
-        <div className='body_principal'>
-            <Header />
-            <div className='body_principal'>
+            <div className='body_home'>
                 <FormComponentLogin />
             </div>
-            <Footer />
-        </div>
     )
 }
 

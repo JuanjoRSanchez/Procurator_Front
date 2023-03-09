@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-//import userAuth from '../../Services/auth.services.js';
-import axios from "axios";
+import { signUp } from '../../Services/auth.services.js';
 
 import { Link } from 'react-router-dom';
 
 import '../../assets/styles/forms.css'
-import '../../assets/styles/botons.css'
+import '../../assets/styles/buttons.css'
 
 export default function FormComponentPost(props) {
-    const API_URL = "http://localhost:9011/api/v1/auth";
 
     const errRef = useRef();
 
@@ -38,25 +36,20 @@ export default function FormComponentPost(props) {
                 phone: telefono,
                 email: email
             }
-            axios.post(API_URL + "/register", JSON.stringify(user),
-                {
-                    headers: {'Content-Type': 'application/json'},
-                }
-                ).then((response) => {
-                    setSucces(true);
-                }).catch((error) => {
-                    console.log(error);
-                });                
+            const res = signUp(user);
+            if(res !== "error"){
+                setSucces(true);
+            }            
         }
     return (
-        <>
+        <div className='body_home'>
             {succes ? (
-                <section>
-                    <h1>Estas Registrado</h1>
+                <section className='body_error'>
+                    <h1>Estas Registrado <br /></h1>
                     <br />
-                    <p>
-                        <Link to='/penas' >Ir a inicio</Link>
-                    </p>
+                    <span>
+                        <Link to='/collectives' >Ir a inicio</Link>
+                    </span>
                 </section>
             ) : (
                 < div className='form_box'>
@@ -118,9 +111,8 @@ export default function FormComponentPost(props) {
                             <input type="submit" className="submitBtn" value="Registrar" />
                         </div>
                     </form>
-                    
                 </div>
             )}
-        </>
+        </div>
     )
 }

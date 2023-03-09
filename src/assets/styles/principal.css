@@ -1,26 +1,37 @@
 .body_principal {
-    background-color: rgb(226, 183, 66);
     width: 100%;
-    min-width: 300px;
-    height: 100%;
-    margin: 0px;
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.body_home {
+    width: 100%;
+    min-height: 60vh;
+    margin: 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap:  wrap;
+    justify-content: center;
+    align-items: normal;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
 
 }
-
 .principal_boxComponent {
-    width: 90%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px;
+    margin-top: 0%;    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    align-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding: 10px;
 
+}
 
+.principal_boxComponent > p {
+    color: aliceblue;
 }
 
 .principal_boxComponent>a {
@@ -29,12 +40,14 @@
 }
 
 .nuevoBox {
-    width: 80%;
+    width: 50%;
+    min-width: 300px;
     height: 30px;
-    border: 1px solid red;
+    border-bottom: 1px solid rgb(255, 254, 254);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    padding-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,4 +57,60 @@
 .nuevoBox>a {
     text-decoration: none;
     color: rgb(20, 91, 119);
+}
+
+.nuevoBox>p {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+
+.nuevoBox1 {
+    width: 80%;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.nuevoBox1>a {
+    text-decoration: none;
+    color: rgb(20, 91, 119);
+}
+
+.nuevoBox1>p {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+
+.body_error{
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.body_error > h2{
+    width: 90%;
+    text-align: center;
+}
+
+.body_error > span{
+    width: 90%;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+.title_component{
+    font-size: 2rem;
 }

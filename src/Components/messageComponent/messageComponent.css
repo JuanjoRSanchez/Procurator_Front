@@ -1,0 +1,49 @@
+.box_message{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 5px solid rgb(0, 155, 26);
+    background-color: rgb(96, 173, 89);
+    color: rgb(255, 255, 255);
+}
+
+.box_message > div{
+    width: 100%;
+    text-align: center;
+}
+
+.box_message > button{
+    width: 100%;
+}
+
+.box_message_notOk{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 5px solid rgb(155, 0, 52);
+    background-color: rgb(173, 98, 63);
+    color: rgb(255, 255, 255);
+}
+
+.box_message_notOk > div{
+    width: 100%;
+    text-align: center;
+}
+
+.box_message_notOk > button{
+    width: 100%;
+}
