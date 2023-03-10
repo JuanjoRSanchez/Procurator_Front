@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { deleteCollective } from "../../../Services/collective.service";
+import { Link } from "react-router-dom";
 
 import './componentCollectiveDetail.css'
 import '../../../assets/styles/buttons.css'
 
+import { deleteCollective } from "../../../Services/collective.service";
 import MessageComponent from "../../messageComponent/MessageComponent";
 
 export default function ComponentCollectiveDetail(props) {
@@ -20,29 +21,8 @@ export default function ComponentCollectiveDetail(props) {
             email:userEmail,
             name:props.collectiveName
         }
-        /*
-        const response = deleteCollective(body, token);
-        console.log(response)
-        if(response === 200){
-            console.log("borrado")
-            setErrMsg("The collective is saved corectly")
-            setSucces(true)
-        }else{
-            setErrMsg("The collective is not deleted correctly")
-            setSucces(true)
-        }
-        */
         deleteCollective(body, token)
         .then((value) => {
-            /*
-            if(value === 200){
-                setErrMsg("The collective is not deleted correctly")
-                setSucces(true)
-            }else{
-                setErrMsg("The collective is deleted corectly")
-                setSucces(true)
-            }
-            */
             if(value === 200){
                 setErrMsg("The collective is deleted corectly")
                 setSucces(true)
@@ -53,6 +33,8 @@ export default function ComponentCollectiveDetail(props) {
             
         })       
     }
+
+
    
     return (
         <>
@@ -77,7 +59,7 @@ export default function ComponentCollectiveDetail(props) {
                 <hr/>
                 <div className="btn_box">
                     <button onClick={handleDelete} className='btn_home'>Delete Collective</button>
-                    <button className='btn_home'>Update Collective</button>
+                    <button className='btn_home'><Link to={`/updateCollective/${props.collectiveId}`}>Update Collective</Link></button>
                 </div>   
             </div>
             

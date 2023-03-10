@@ -10,6 +10,7 @@ import Updategame from './Views/games_views/Update_game.js'
 import Header from './Components/header/Header.js'
 import Footer from './Components/footer/Footer.js'
 import Mierda from './Views/Mierda.js'
+import UpdateCollective from './Views/collectives_views/updateCollective/UpdateCollective.js'
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
                   <Route path='collectives' element={<Collectives />}></Route>
                   <Route path='newCollective' element={<NewCollective />}></Route>
                   <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
+                  <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
                   <Route path='newGame/:idCollective' element={<NewGame />}></Route>
-                  <Route path='updateGame/:idGame' element={<Updategame />}></Route>
+                  <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
                   <Route path='mierda' element={<Mierda />}></Route>
               </Routes>
           <Footer />

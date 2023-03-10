@@ -20,6 +20,33 @@ export const deleteCollective = async (collective, token) => {
         });  
 }
 */
+
+export const updateCollective = async (collective, token) => {
+    try{
+        const resp = await axios({
+            method: 'PUT',
+            url: API_URL + '/updateCollective',
+            headers: {
+            "Authorization": `Bearer ${token}`,
+            'Content-Type': 'application/json'
+            },
+            data: collective
+            })
+            .then((response) => {
+                return response.request.status;
+            }
+            ).catch((error) => {
+                return error.response.status;
+            });  
+            return resp
+    }
+    catch(error){
+        return error
+    }
+    
+}
+
+
 export const deleteCollective = async (collective, token) => {
     try{
         const resp = await axios({
