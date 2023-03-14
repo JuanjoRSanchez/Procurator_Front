@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
-import axios from 'axios';
+import { addGame } from '../../../Services/games.services.js';
 
 
 export default function Games(props) {
@@ -11,7 +11,6 @@ export default function Games(props) {
     const [gameDate, setgameDate] = useState();
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-    const baseURL = "http://localhost:9011/api/v1/games/addGame";
 
    
     const handleSubmit = async (e) => {
@@ -21,38 +20,19 @@ export default function Games(props) {
             collectiveId: props.idCollective,
             dateMatch: gameDate
         }
-        const resp = await axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
+
+        addGame(body, token)
+            .then((data) => {
+                console.log(data)
+                if(data === '200'){
+                    setErrMsg("The game is saved corectly")
+                    setSucces(true)
+                }else{
+                    setErrMsg("The game is not saved correctly")
+                    setSucces(true)
+                }
             })
-            .then((response) => {
-                setErrMsg("The collective is saved corectly")
-                setSucces(true)
-                return JSON.stringify(response.data);     
-               
-            }).catch((error) => {
-                console.log(error)
-                setErrMsg("The collective is not saved correctly")
-                setSucces(true)
-                return error.response.status;
-            });  
-            
-            console.log(resp)
-            /*
-            if(resp === "OK"){
-                console.log("guardado")
-                setErrMsg("The collective is saved corectly")
-                setSucces(true)
-            }else{
-                setErrMsg("The collective is not saved correctly")
-                setSucces(true)
-            }
-            */
+
             gameDateRef.current.focus();
     }
 
@@ -61,7 +41,7 @@ export default function Games(props) {
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} />
+                <MessageComponent message={errMsg}  />
                 :
                 null
             }
@@ -82,7 +62,6 @@ export default function Games(props) {
                             value={gameDate}
                             className="input"
                         />
-
                     </div>
                     <div className="btnContainer">
                         <button type="submit" className="submitBtn" value="Actualizar" >Save</button>
@@ -93,41 +72,3 @@ export default function Games(props) {
     )
 }
 
-/*
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const body = {
-            email: email,
-            gameName: gameDate
-        }
-        const resp = await axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
-            })
-            .then((response) => {
-                return JSON.stringify(response.data);     
-            }
-            ).catch((error) => {
-                console.log(error)
-                return error.response.status;
-            });  
-            console.log(resp)
-            if(resp === "OK"){
-                console.log("guardado")
-                setErrMsg("The collective is saved corectly")
-                setSucces(true)
-                setCollectiveName("")             
-            }else{
-                setErrMsg("The collective is not saved correctly")
-                setSucces(true)
-                setCollectiveName("")
-            }
-            collectiveNameRef.current.focus();
-    }
-
-*/

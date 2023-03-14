@@ -1,6 +1,7 @@
 import React from 'react'
 import './messageComponent.css'
 import { useNavigate } from 'react-router-dom'
+
 export default function MessageComponent(prop) {
     const navigate = useNavigate();
     let messageBox_class = 'box_message'
@@ -9,15 +10,26 @@ export default function MessageComponent(prop) {
         messageClass = 'btn_alert_notOk'
         messageBox_class = 'box_message_notOk'
     }
-    const redirect = () => {
-        navigate("/collectives");
+    const actualCollective = localStorage.getItem('actualCollective')
+    const redirection = (e) => {
+        e.preventDefault()
+        console.log(prop.navi)
+        if(prop.navi === '/collectiveDetail/'){
+            navigate(prop.navi + actualCollective)
+        }if (prop.navi === '/collectives') {
+            navigate(prop.navi)
+        }
+        else{
+            window.location.reload()
+        }
     }
+
     return (
             <div className={messageBox_class}>
                 <div>
                     <p>{prop.message}</p>
                 </div>
-                <button onClick={redirect} className={messageClass}>Accept</button>
+                <button onClick={redirection} className={messageClass}>Accept</button>
             </div>
     )
 }

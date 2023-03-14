@@ -58,3 +58,8 @@ hr{
     align-items: center;
     flex-wrap: wrap;
 }
+
+.title_empty{
+    font-size: 1.5rem;
+    color: aliceblue;
+}

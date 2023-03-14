@@ -29,19 +29,16 @@ export default function ComponentCollectiveDetail(props) {
             }else{
                 setErrMsg("The collective is not deleted correctly")
                 setSucces(true)
-            }
-            
+            }         
         })       
     }
 
-
-   
     return (
         <>
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} />
+                <MessageComponent message={errMsg} navi='/collectives'/>
                 :
                 null
             }

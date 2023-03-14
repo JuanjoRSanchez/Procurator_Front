@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom'
 
-import { deleteCollective } from "../../../Services/collective.service";
 
 import './componentGameBox.css'
 import '../../../assets/styles/buttons.css'
 
 import MessageComponent from "../../messageComponent/MessageComponent";
+import { deleteGame } from "../../../Services/games.services";
 
 export default function ComponentGameBox(props) {
 
-    const userEmail = localStorage.getItem("userEmail");
     const token = localStorage.getItem("jwt") 
-
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
 
@@ -37,20 +35,17 @@ export default function ComponentGameBox(props) {
     
     const handleDelete = (e) => {
         e.preventDefault();
-        const body = {
-            email:userEmail,
-            name:props.collectiveName
-        }
-        const response = deleteCollective(body, token);
-        console.log(response)
-        if(response === "200"){
-            console.log("borrado")
-            setErrMsg("The collective is saved corectly")
-            setSucces(true)
-        }else{
-            setErrMsg("The collective is not deleted correctly")
-            setSucces(true)
-        }
+        deleteGame(props.idGame, token)
+            .then((value) => {
+                console.log(value)
+                if(value === '200'){
+                    setErrMsg("The collective is deleted corectly")
+                    setSucces(true)
+                }else{
+                    setErrMsg("The collective is not deleted correctly")
+                    setSucces(true)
+                }
+            })
     }
    
     return (
@@ -86,11 +81,7 @@ export default function ComponentGameBox(props) {
                     <button onClick={handleDelete} className='btn_showHide'>Delete Game</button>
                 </div>   
             </div>
-            
         </>
     )
 }
 
-/*
-className='body_gameComponentBox'
-*/

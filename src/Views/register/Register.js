@@ -1,4 +1,4 @@
-import FormComponentRegistro from './FormComponentRegistro'
+import FormComponentRegistro from '../../Components/forms/formComponentRegister/FormComponentRegistro'
 import '../../assets/styles/principal.css'
 
 export default function Registro(){

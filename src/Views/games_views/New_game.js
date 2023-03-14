@@ -10,7 +10,7 @@ export default function Newgame() {
     return (
         <div className='body_home'>
             <div className='body_principal'>
-               <FormGame  idCollective={idCollective}/>
+               <FormGame  idCollective={idCollective} />
             </div>
        </div>
     )

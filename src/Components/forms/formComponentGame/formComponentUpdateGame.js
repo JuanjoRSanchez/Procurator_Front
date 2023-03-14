@@ -1,69 +1,45 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
-import axios from 'axios';
+import { updateGame } from '../../../Services/games.services.js';
 
 
 export default function FormComponentUpdateGame(props) {
     const token = localStorage.getItem("jwt")
 
-    const gameDateRef = useRef();
-    const whiteScoreRef = useRef();
-    const blackScoreRef = useRef();
-
-    
-    const [gameDate, setgameDate] = useState();
-    const [whiteScore, setWhiteScore] = useState();
-    const [blackScore, setBlackScore] = useState();
-
+    const [gameDate, setgameDate] = useState('');
+    const [whiteScore, setWhiteScore] = useState('');
+    const [blackScore, setBlackScore] = useState('');
 
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-    const baseURL = "http://localhost:9011/api/v1/games/update";
-
    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const body = {
-            id: props.isGame,
+            id: props.idGame,
             whiteScore: whiteScore,
             blackScore: blackScore,
             dateMatch: gameDate
         }
         console.log(body)
-        const resp = await axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
-            })
-            .then((response) => {
-                return JSON.stringify(response.data);     
-            }
-            ).catch((error) => {
-                console.log(error)
-                return error.response.status;
-            });  
-            console.log(resp)
-            if(resp === "OK"){
-                console.log("guardado")
+        updateGame(body, token).then((data) =>{
+            if(data === "200"){
                 setErrMsg("The collective is saved corectly")
                 setSucces(true)
             }else{
                 setErrMsg("The collective is not saved correctly")
                 setSucces(true)
             }
-            gameDateRef.current.focus();
+        })
     }
+
 
     return (
         <div> 
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} />
+                <MessageComponent message={errMsg} navi='/collectiveDetail/'/>
                 :
                 null
             }
@@ -76,19 +52,16 @@ export default function FormComponentUpdateGame(props) {
                         <label htmlFor="gamedate" className="label">Game date:</label>
                         <input
                             type="datetime-local"
-                            id='gameDate'
-                            ref={gameDateRef}
+                            id='gameDate'                        
                             autoComplete='off'
                             onChange={(e) => setgameDate(e.target.value)}
-                            required
                             value={gameDate}
                             className="input"
                         />
                         <label htmlFor="whiteScore" className="label">White score:</label>
                         <input
                             type="text"
-                            id='whiteScore'
-                            ref={whiteScoreRef}
+                            id='whiteScore'                           
                             autoComplete='off'
                             onChange={(e) => setWhiteScore(e.target.value)}
                             required
@@ -98,8 +71,7 @@ export default function FormComponentUpdateGame(props) {
                         <label htmlFor="blackScore" className="label">Black score:</label>
                         <input
                             type="text"
-                            id='blackScore'
-                            ref={blackScoreRef}
+                            id='blackScore'                           
                             autoComplete='off'
                             onChange={(e) => setBlackScore(e.target.value)}
                             required

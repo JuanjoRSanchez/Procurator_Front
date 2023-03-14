@@ -11,33 +11,58 @@ import Header from './Components/header/Header.js'
 import Footer from './Components/footer/Footer.js'
 import Mierda from './Views/Mierda.js'
 import UpdateCollective from './Views/collectives_views/updateCollective/UpdateCollective.js'
+import { AuthProvider } from './context/AuthProvider';
+import ProtectedRoute  from './ProtectedRoute.jsx'
 
-function App() {
+function App() { 
   return (
     <BrowserRouter>
+        <AuthProvider>
           <Header />
               <Routes>
                   <Route path='/' element={<Home />}></Route>
                   <Route path='login' element={<Login />}></Route>
                   <Route path='register' element={<Register />}></Route>
-                  <Route path='collectives' element={<Collectives />}></Route>
-                  <Route path='newCollective' element={<NewCollective />}></Route>
-                  <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
-                  <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
-                  <Route path='newGame/:idCollective' element={<NewGame />}></Route>
-                  <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
-                  <Route path='mierda' element={<Mierda />}></Route>
+                  <Route element={<ProtectedRoute />}>
+                      <Route path='collectives' element={<Collectives />} />
+                      <Route path='newCollective' element={<NewCollective />}></Route>
+                      <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
+                      <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
+                      <Route path='newGame/:idCollective' element={<NewGame />}></Route>
+                      <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
+                      <Route path='mierda' element={<Mierda />}></Route>
+                  </Route>                
               </Routes>
           <Footer />
+        </AuthProvider>
     </BrowserRouter>
   );
 }
 
 export default App;
 
-
 /*
-    <Header />
+<Routes>
+    <Route path='/' element={<Home />}></Route>
+    <Route path='login' element={<Login />}></Route>
+    <Route path='register' element={<Register />}></Route>
+    <Route element={<ProtectedRoute />}>
+        <Route path='collectives' element={<Collectives />} />
+        <Route path='newCollective' element={<NewCollective />}></Route>
+        <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
+        <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
+        <Route path='newGame/:idCollective' element={<NewGame />}></Route>
+        <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
+        <Route path='mierda' element={<Mierda />}></Route>
+    </Route>                
+</Routes>
 
-<Authprovider>
+
+
+<Route path='newCollective' element={<NewCollective />}></Route>
+<Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
+<Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
+<Route path='newGame/:idCollective' element={<NewGame />}></Route>
+<Route path='updateGame/:idGame' element={< Updategame/>}></Route>
+<Route path='mierda' element={<Mierda />}></Route>
 */

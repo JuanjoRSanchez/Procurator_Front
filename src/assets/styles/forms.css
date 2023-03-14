@@ -1,6 +1,7 @@
 .form_box {
     width: 50%;
     min-width: 330px;
+    max-width: 600px;
     height: auto;
     margin: auto;
     padding-bottom: 25px;

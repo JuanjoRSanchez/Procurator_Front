@@ -7,15 +7,14 @@ import ComponentCollectiveDetail from '../../../Components/boxes/componentCollec
 import '../../../assets/styles/principal.css'
 import './collectiveDetail.css'
 import '../../../assets/styles/buttons.css'
-import axios from 'axios';
 import ComponentGameBox from '../../../Components/boxes/componentGameBox/ComponentGameBox.js';
+import { getCollectivesByUserEmailAndName } from '../../../Services/collective.service.js';
+import { getGames } from '../../../Services/games.services.js';
 
 export default function CollectiveDetail() {
     const { collectiveName } = useParams();
-    
 
     const [collectiveStyle, setCollectiveStyle] = useState("boxComponent_collective_oculto")
-    const baseURL = "http://localhost:9011/api/v1/collectives/getCollective";
     const userEmail = localStorage.getItem("userEmail");
     let token = localStorage.getItem("jwt");
 
@@ -24,49 +23,41 @@ export default function CollectiveDetail() {
     const [timeCreation, setTimeCreation] = useState("");
     const [collectiveId, setCollectiveId] = useState("");
     const [games, setGames] = useState({});
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         let body = {
             email: userEmail,
             name: collectiveName
         }  
-        axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
-            })
-            .then((response) => {
-                setCollective(response.data);
-                setCollectiveId(response.data.id)
-                setDateCreation(response.data.creationDate.split("T")[0])
-                setTimeCreation(response.data.creationDate.split("T")[1].split(".")[0])
+
+        getCollectivesByUserEmailAndName(body, token).then((data) => {
+            if(data !== 'error'){
+                setCollective(data);
+                setCollectiveId(data.id)
+                setDateCreation(data.creationDate.split("T")[0])
+                setTimeCreation(data.creationDate.split("T")[1].split(".")[0])
+                localStorage.setItem('actualCollective', collectiveName)
+            }else{
+                console.log(data);
             }
-            ).catch((error) => {
-                console.log(error);
-            });  
+        })
             
-    }, [baseURL, token, userEmail, collectiveName]);
+    }, [token, userEmail, collectiveName]);
  
     const handleGetGames = (e) => {
         e.preventDefault();
-        axios({
-            method: 'GET',
-            url: "http://localhost:9011/api/v1/games/getGames/" + collectiveId,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            })
-            .then((response) => {
-                setGames(response.data)
+
+        getGames(collectiveId, token).then((data) => {
+            if(data.status){
+                console.log(data.status);
+                setMessage(`You don't have games yet`)
+            }else{
+                setGames(data)
+
             }
-            ).catch((error) => {
-                console.log(error.response.status);
-            });  
+        })
+         
     }
 
     const showCollectiveDetails = (e) => {
@@ -127,14 +118,20 @@ export default function CollectiveDetail() {
                         gameCreationDate={game.creationDate.split('T')[0]}
                         gameDate={game.dateMatch.split(' ')[0]}
                         gameHour={game.dateMatch.split(' ')[1]}
+                        collectiveName={collectiveName}
                         />
                             
                     })
                     :
-                    <p>No hay partidos</p> 
-                }                      
+                    <p className='nuevoBox title_empty'>{message}</p> 
+                }  
+                 
             </div>
+            <p className='title_empty'>{message}</p> 
         </div>
     )
 }
 
+/*
+<div className='nuevoBox title_empty'>You don't have games yet</div>
+*/

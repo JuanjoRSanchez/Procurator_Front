@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { signUp } from '../../Services/auth.services.js';
+import { signUp } from '../../../Services/auth.services.js';
 
 import { Link } from 'react-router-dom';
 
-import '../../assets/styles/forms.css'
-import '../../assets/styles/buttons.css'
+import '../../../assets/styles/forms.css'
+import '../../../assets/styles/buttons.css'
 
 export default function FormComponentPost(props) {
 
@@ -45,10 +45,10 @@ export default function FormComponentPost(props) {
         <div className='body_home'>
             {succes ? (
                 <section className='body_error'>
-                    <h1>Estas Registrado <br /></h1>
+                    <h1>Estás registrado <br /></h1>
                     <br />
                     <span>
-                        <Link to='/collectives' >Ir a inicio</Link>
+                        <button className='btn_home'><Link to='/collectives' >Ir a inicio</Link></button>
                     </span>
                 </section>
             ) : (

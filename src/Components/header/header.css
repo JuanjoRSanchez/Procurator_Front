@@ -4,7 +4,7 @@
     height: 150px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .img_boxHeader {
@@ -26,25 +26,20 @@
 }
 
 .use_box{
-    width: 30%;
+    width: 50%;
     min-width: 100px;
-    height: 60px;
+    max-width: 600px;
+    height: 80%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
 }
-.use_box > div:first-child{
-    width: 100%;
-    min-width: 70px;
-    height: 60px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
+
+
 .user_boxGreetings{
-    width: 40%;
+    width: 80%;
     min-width: 100px;
     height: 40px;
     background-color: rgb(235, 165, 15);
@@ -57,12 +52,13 @@
 }
 
 .user_boxLogButton {
-    width: 10%;
-    min-width: 100px;
+    width: 45%;
+    /*min-width: 100px;*/
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .user_boxLogButton>button{
@@ -89,22 +85,23 @@
     .img_boxHeader>a img {
         width: 70%;
         height: auto;
-        margin-left: 20%;
+        margin-left: 10%;
     }
+  
+   
+
+}
+
+@media (max-width: 410px){
     .use_box{
-        min-width: 150px;
-        height: 100px;
-        align-items: center;
-        justify-content: center;
-    }
-    .use_box > div:first-child{
-        border: 1px solid rgb(224, 11, 243);
         width: 100%;
-        min-width: 70px;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
     }
+    .user_boxLogButton>button{
+        width: 80px;
+        height: 30px;
+    }
+    .user_boxLogButton {
+        width: 45%;
+    }
+    
 }

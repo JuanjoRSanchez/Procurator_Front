@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { login }from '../../../Services/auth.services.js';
 import { Link, useNavigate } from 'react-router-dom';
-import  AuthContext  from '../../../context/AuthProvider.js'
+import { useAuth }  from '../../../context/AuthProvider.js'
 import '../../../assets//styles/forms.css'
 
 
 export default function FormComponentLogin() {
-    const { setAuth } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const userRef = useRef();
@@ -30,7 +29,7 @@ export default function FormComponentLogin() {
         setErrMsg('');
 
     }, [userEmail, password])
-
+    const { setAuthUser, setIsLoggedIn} = useAuth()
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = {
@@ -38,12 +37,11 @@ export default function FormComponentLogin() {
             password: password
         }
         const res = await login(user);
-        if(res === "ok" ){    
-            setSucces(false);     
-            console.log(res)       
+        if(res === "ok"){    
+            setSucces(false);   
         }else {
-            setAuth({res})
-            console.log(res) 
+            setAuthUser(res);
+            setIsLoggedIn(true) 
             navigate("/collectives");
         }        
     }

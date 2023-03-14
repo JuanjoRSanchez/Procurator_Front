@@ -1,47 +1,43 @@
 import React from 'react'
-import {useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import '../../../assets/styles/principal.css'
 import './collectives.css'
-import axios from 'axios';
+//import AuthContext from '../../../context/AuthProvider';
 import BoxCollective from '../../../Components/boxes/componentGenerealBox/boxCollective.js';
-import  AuthContext  from '../../../context/AuthProvider.js'
  
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { getAllCollectives } from '../../../Services/collective.service';
+import { parseJwt } from '../../../Services/token.service';
 
 export default function Collectives() {
-    const navigate = useNavigate()
-    const { auth } = useContext(AuthContext)
-    useEffect(() => {
-        if(!auth){
-            navigate('/mierda')
-        }
-    });
 
-    const baseURL = "http://localhost:9011/api/v1/collectives/getAll";
-    const userEmail = localStorage.getItem("userEmail");
-    let token = localStorage.getItem("jwt");
+    const [Msg, setMsg] = useState()
+
+    const tokenn = localStorage.getItem('jwt')
+    const email = parseJwt(tokenn).sub
 
     const [collectives, setCollectives] = useState({});
+    
     useEffect(() => {
-        let user = {
-            email: userEmail
-        }  
-        axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: user
-            })
-            .then((response) => {
-                setCollectives(response.data);
+        getAllCollectives(tokenn, email)
+        .then((value) => {
+            if(value === 'error'){
+                setMsg("No collectives found")
+                setCollectives('')
+            }else{
+                setCollectives(value)
             }
-            ).catch((error) => {
-                console.log(error);
-            });  
-        }, [baseURL, token, userEmail]);
+        }) 
+        
+        
+    }, [tokenn, email]);
+    useEffect(() => {
+        const actualCollective = localStorage.getItem('actualCollective')
+        if(actualCollective){
+            localStorage.removeItem('actualCollective')
+        }
+        
+    }, [tokenn, email]);
 
     return (
         <div className='body_home'>        
@@ -50,11 +46,16 @@ export default function Collectives() {
                 </div>
                 <div className='principal_boxComponent'>
                     {
+                        collectives
+                        ?
                         Array.from(collectives).map((collective) => {
+                            
                             return <Link key={collective.id} to={`/collectiveDetail/${collective.name}`}>
-                                        <BoxCollective key={collective.id} title={collective.name} />
+                                        <BoxCollective key={collective.id} title={collective.name} idCollective={collective.id} />
                                    </Link>;
                         })
+                        :
+                        <p>{Msg}</p> 
                     }              
                 </div>     
         </div>

@@ -15,6 +15,7 @@ export function signUp(user) {
                     localStorage.setItem("userEmail", user.email)        
                     localStorage.setItem("jwt", response.data.token)
                     localStorage.setItem("userName", user.name);
+                    
                 }).catch((error) => {
                     console.log(error)
                     return "error";
@@ -22,6 +23,7 @@ export function signUp(user) {
 }
 
 export  function login (user) {
+
     const response = axios.post(API_URL + "/authenticate", JSON.stringify(user),
     {
         headers: {'Content-Type': 'application/json'},
@@ -30,9 +32,7 @@ export  function login (user) {
         localStorage.setItem("userEmail", user.email)        
         localStorage.setItem("jwt", response.data.token)
         localStorage.setItem("userName", response.data.userName);
-
-
-        response = response.data  
+        return response.data  
     }).catch((error) => {
         console.log("Error desde login: " +  error);
         return error.response.status 
@@ -44,6 +44,7 @@ export  function  logout()  {
     localStorage.removeItem("userEmail");
     localStorage.removeItem("jwt")
     localStorage.removeItem("userName")
+    localStorage.removeItem("actualCollective")
 }
 
  export function getTokenDate(token) {

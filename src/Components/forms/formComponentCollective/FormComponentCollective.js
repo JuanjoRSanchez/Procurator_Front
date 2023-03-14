@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
-import axios from 'axios';
+import { addCollective } from '../../../Services/collective.service.js';
 
 
 export default function Partidos() {
@@ -12,7 +12,6 @@ export default function Partidos() {
     const [collectiveName, setCollectiveName] = useState('');
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-    const baseURL = "http://localhost:9011/api/v1/collectives/addCollective";
 
     useEffect(() => {
         collectiveNameRef.current.focus();
@@ -24,44 +23,30 @@ export default function Partidos() {
             email: email,
             name: collectiveName
         }
-        const resp = await axios({
-            method: 'POST',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
-            })
-            .then((response) => {
+
+        addCollective(body, token).then((data) =>{
+            console.log(data)
+            if(data === '200'){
                 setErrMsg("The collective is saved corectly")
-                setSucces(true)
                 setCollectiveName("")      
-                return JSON.stringify(response.data);     
-            }
-            ).catch((error) => {
+                setSucces(true)
+            }else{
                 setErrMsg("The collective is not saved correctly")
                 setSucces(true)
-                setCollectiveName("")
-                return error.response.status;
-            });  
-            console.log(resp)
+                setCollectiveName("")      
+            }
+        }
+        )
          
-            collectiveNameRef.current.focus();
+        collectiveNameRef.current.focus();
     }
-    /*
-    else if(resp === 302){
-        setErrMsg("Already exist a collective with this name")
-        setSucces(true)
-        setCollectiveName("")
-    }
-    */
+
     return (
         <div> 
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} />
+                <MessageComponent message={errMsg} navi={'/collectives'}/>
                 :
                 null
             }
@@ -92,7 +77,3 @@ export default function Partidos() {
     )
 }
 
-/*
-<p ref={errRef} className={errMsg ? "errmsg" : "offsscreen"} aria-live="assertive">{errMsg}</p>
-
-*/

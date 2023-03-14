@@ -14,11 +14,12 @@
 */
 .logoBox {
     width: 45%;
-    /*min-width: 250px;*/
     max-width: 800px;
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo {
@@ -30,19 +31,22 @@
 .botonera_home {
     width: 60%;
     height: 40%;
-    /*min-width: 250px;*/
     display: flex;
     justify-content: space-around;
     align-items: center;
-
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .text_content{
     width: 80%;
     height: auto;
     margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     color: rgb(255, 255, 255);
+    font: 1em sans-serif;
 }
 
 @media (max-width: 900px) {
