@@ -131,6 +131,7 @@ a{
     font-size: 0.8em;
 }
 
+
 @media  (max-width: 355px) {
     .principal_boxComponent {
         width: 90%;
