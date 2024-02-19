@@ -6,18 +6,18 @@ import '../../../assets/styles/buttons.css'
 
 import { deleteGame } from "../../../Services/games.services";
 import MessageComponent from "../../messageComponent/MessageComponent";
+import { getActualGame } from "../../../Services/dataAcces";
 
 export default function ComponentGameDetail(props) {
 
     const token = localStorage.getItem("jwt") 
-    const game = JSON.parse( localStorage.getItem('game'))
+    const game = getActualGame()
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-
     const handleDelete = (e) => {
         e.preventDefault();
        
-        deleteGame(props.gameId, token)
+        deleteGame(game.idGame, token)
         .then((value) => {
             if(value === 200){
                 setErrMsg("The collective is deleted corectly")
@@ -48,14 +48,17 @@ export default function ComponentGameDetail(props) {
                         <p>Creation date: {game.gameCreationDate}</p> 
                         <p>Hour : {game.gameHour}</p> 
                     </div>
+                    <div>
+                        <p>White Score: {game.scoreWhite}</p> 
+                        <p>BlackScore : {game.scoreBlack}</p> 
+                    </div>
                 </div>
                 <hr/>
                 <div className="btn_box">
-                    <button onClick={handleDelete} className='btn_home'>Delete Collective</button>
-                    <button className='btn_home'><Link to={`/updateCollective/${props.collectiveId}`}>Update Collective</Link></button>
+                    <button onClick={handleDelete} className='btn_home'>Delete Game</button>
+                    <button className='btn_home'><Link to={'/updateGame'}>Update Game</Link></button>
                 </div>   
             </div>
-            
         </>
     )
 }

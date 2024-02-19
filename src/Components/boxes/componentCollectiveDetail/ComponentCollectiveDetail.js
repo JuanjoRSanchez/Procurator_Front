@@ -1,24 +1,44 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
 import './componentCollectiveDetail.css'
 import '../../../assets/styles/buttons.css'
 
-import ButtonDetails from "../../button_detail/ButtonsDetails";
+import { deleteCollectiveById } from '../../../Services/collective.service';
+import { Link } from 'react-router-dom';
+import { getActualToken } from '../../../Services/dataAcces';
+import MessageComponent from '../../messageComponent/MessageComponent';
+import { useState } from 'react';
 
 export default function ComponentCollectiveDetail(props) {
 
-    const userEmail = localStorage.getItem("userEmail");
-    const body1 = {
-        email:userEmail,
-        name:props.collectiveName
+    const token = getActualToken();
+    const [errMsg, setErrMsg] = useState(false);
+    const [succes, setSucces] = useState(false);
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+        deleteCollectiveById(props.collectiveId, token)
+            .then((data) => {
+                if(data === 400){
+                    setErrMsg("Collective not deleted correctly")
+                    setSucces(true)
+                }else{
+                    setErrMsg("Collective deleted correctly")
+                    setSucces(true)  
+                }
+            }).catch((error) => {
+                console.log(error)
+            })
     }
 
-    const entity = 'collective'
-    const infoEntity = body1
-    const linkToUpdate = '/updateCollective/' + props.collectiveId
-    const linkToBack = '/collectives'
+
     return (
+        <>
+            {
+            succes 
+            ?
+            <MessageComponent message={errMsg} navi={'/collectives'}/>
+            :
+            null
+            }
             <div className='collectiveDetail'>
                 <div className="boxComponent">
                     <div>
@@ -31,8 +51,15 @@ export default function ComponentCollectiveDetail(props) {
                     </div>
                 </div>
                 <hr/>
-                <ButtonDetails entity={entity} infoEntity={infoEntity} linkToBack={linkToBack} linkToUpdate={linkToUpdate} />
+                <div>
+                    <div className="btn_box">
+                        <button onClick={handleDelete} className='btn_home'>Delete Collective</button>
+                        <button className='btn_home'><Link to={`/updateCollective/${props.collectiveId}`}>Update Collective</Link></button>
+                    </div> 
+                </div>
             </div> 
+        </>
+    
     )
 }
 

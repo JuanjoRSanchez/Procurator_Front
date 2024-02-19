@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Buffer } from 'buffer';
+import { getActualToken, getActualUserName } from "../dataAcces";
 
 const API_URL = "http://localhost:9011/api/v1/auth";
 
@@ -20,29 +21,37 @@ export function signUp(user) {
                 });               
 }
 
-export  function login (user) {
 
-    const response = axios.post(API_URL + "/authenticate", JSON.stringify(user),
-    {
-        headers: {'Content-Type': 'application/json'},
-    }
-    ).then((response) => {
-        localStorage.setItem("userEmail", user.email)        
-        localStorage.setItem("jwt", response.data.token)
-        localStorage.setItem("userName", response.data.userName);
-        return response.data  
-    }).catch((error) => {
-        console.log("Error desde login: " +  error);
-        return error.response.status 
-    });
-    return response;
+export  const login = async (user) => {
+    const action = "/authenticate"
+    const resp = await axios({
+        method: 'POST',
+        url: API_URL + action,
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        data: user
+        })
+        .then((response) => {
+            localStorage.setItem("userEmail", user.email)        
+            localStorage.setItem("jwt", response.data.token)
+            localStorage.setItem("userName", response.data.userName);
+            console.log(response.data)
+            return response.data  
+        }
+        ).catch((error) => {
+            console.log("Error desde login: " +  error);
+            return error.response.status;
+        });  
+    return resp
 }
 
 export  function  logout()  {
     localStorage.removeItem("userEmail");
     localStorage.removeItem("jwt")
     localStorage.removeItem("userName")
-    localStorage.removeItem("actualCollective")
+    localStorage.removeItem("Collective")
+    localStorage.removeItem("game")
 }
 
  export function getTokenDate(token) {
@@ -63,13 +72,19 @@ export function isTokenExpired(token) {
   }
 
 export function isAuthenticated (){
-    let userName = localStorage.getItem("userName");
-    let jwt = localStorage.getItem("jwt")
-    let jwtCheck = isTokenExpired(jwt);
-    if(userName && jwtCheck){
-        return {"x-auth-token": jwt}
+    let userName = getActualUserName()
+    let jwt = getActualToken()
+    let jwtCheck = null;
+    if(jwt === null){
+        console.log('eeeeeee')
     }else{
-        return {};
+        jwtCheck = isTokenExpired(jwt);
+        if(userName !== null && jwtCheck !== null ){
+            return true
+        }else{
+            return false;
+        }
     }
+    
+    
  }
-

@@ -1,58 +1,39 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { deletePlayer } from "../../../Services/players.service";
-import MessageComponent from "../../messageComponent/MessageComponent";
+import React, { useEffect, useRef } from "react";
+import ButtonDetails from "../../button_detail/ButtonsDetails";
 
 import './componentPlayerBox.css'
 
 export default function ComponentPlayerBox(props) {
+    const box = useRef(null)
 
-    const token = localStorage.getItem("jwt")
-    const [msg, setMsg] = useState('')
-    const [succes, setSucces] = useState(false);
+    const entity = 'player'
+    const infoEntity = props.idPlayer
+    const linkToUpdate = '/updatePlayer/' + props.idPlayer
+    const linkToBack = '/players'
+    const detail = '/playerDetail'
 
-    const handleDelete = () => {
-        deletePlayer(props.id, token).then((data) => {
-            if(data.status === '200'){
-                setMsg('Player deleted correctly')
-                setSucces(true)
-            }else{
-               setMsg('Player not deleted correctly')
-               setSucces(true) 
-            }
-
-        })
-    }
+    const played_Class = 'body_playerComponentBox active';
+    const notPlayed_Class = 'body_playerComponentBox not_active'
+    const active = props.active
+    useEffect(() => {
+        
+        if(active){
+            box.current.className = played_Class
+        }else{
+            box.current.className = notPlayed_Class
+        }
+    }, [box, played_Class, notPlayed_Class, active ]);
 
     return (
-        <>
-            {
-                succes 
-                ?
-                <MessageComponent message={msg} navi={`/players/${props.idCollective}`} />
-                :
-                null
-            }
-            
-            <div className="body_componentBox">
-                <div>
-                    <div className="">
-                        <p>Player name: {props.name}</p>   
-                        <p>Player age: {props.age}</p> 
-                    </div>
-                    <div>
-                        <p>Player  creation date: {props.creationDate}</p> 
-                        <p>Player phone: {props.phone}</p> 
-                    </div>
+            <div ref={box} >
+                <div className="playerBoxComponent fontBox">
+                    <p>Player name:</p>
+                    <p>{props.name}</p>
                 </div>
-                <br />
-                <hr/>
-                <div className="btn_box">
-                    <button onClick={handleDelete} className='btn_home'>Delete player</button>
-                    <button className='btn_home'><Link to={`/updateCollective/${props.collectiveId}`}>Update player</Link></button>
-                </div>   
+                <div>
+                    <ButtonDetails entity={entity} infoEntity={infoEntity} infoEntityAll={props} linkToBack={linkToBack} linkToUpdate={linkToUpdate} detail={detail} />
+                </div> 
             </div>
-    
-         </>
-    )
+        )
 }
+

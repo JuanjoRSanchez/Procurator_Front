@@ -1,17 +1,16 @@
 import React from 'react'
 import '../../../assets/styles/principal.css'
 
-import { useParams } from 'react-router-dom'
 import FormComponentCollectiveUpdate from '../../../Components/forms/formComponentCollective/FormComponentColletiveUpdate.js'
+import { getActualCollective } from '../../../Services/dataAcces'
 
 export default function UpdateCollective() {
-    const { idCollective } = useParams()
-    console.log(idCollective)
+    const actualCollective = getActualCollective()
 
     return (
         <div className='body_home'>
             <div className='body_principal'>
-               <FormComponentCollectiveUpdate  idCollective={idCollective} />
+               <FormComponentCollectiveUpdate  idCollective={actualCollective} />
             </div>
        </div>
     )

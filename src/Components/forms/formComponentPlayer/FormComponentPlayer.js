@@ -15,31 +15,30 @@ export default function FormComponentPlayer(props) {
     const [telefono, setTelefono] = useState('');
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
+    const [active, setActive] = useState()
 
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
 
-   
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let user = {
+        let player = {
             name: nombre,
             password: pass,
             role: "PLAYER",
             age: edad,
             address: direccion,
             phone: telefono,
-            email: email
+            email: email,
+            active: active
         }
         let body = {
-            player: user,
+            player: player,
             idCollective: parseInt(idCollective)
         }
-        console.log(body)
-        addPlayerToCollective(idCollective, token).then((data) => {
-                console.log(data)
-                if(data === '200'){
+        addPlayerToCollective(body, token).then((data) => {
+                if(data === 200){
                     setErrMsg("The player is saved corectly")
                     setSucces(true)
                 }else{
@@ -112,6 +111,29 @@ export default function FormComponentPlayer(props) {
                             name="email" 
                             className="input" 
                             required onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className="inputContainer ">
+                            <div  className=" red">
+                                <label htmlFor="" className="label ">Active:</label>
+                                <input 
+                                value={true}
+                                id='active1'
+                                type="radio" 
+                                name="active" 
+                                className="input " 
+                                required onChange={(e) => setActive(e.target.value)} />
+                            </div>
+                            <div className=" red">
+                                <label htmlFor="" className="label ">Not active:</label>
+                                <input 
+                                value={false}
+                                id='active2'
+                                type="radio" 
+                                name="active" 
+                                className="input " 
+                                required onChange={(e) => setActive(e.target.value)} />
+                            </div>
+                    
                         </div>
                     </div>
                     <div className="btnContainer">

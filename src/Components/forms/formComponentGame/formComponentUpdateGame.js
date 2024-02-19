@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { updateGame } from '../../../Services/games.services.js';
+import { getActualCollective, getActualGame } from '../../../Services/dataAcces.js';
 
 
 export default function FormComponentUpdateGame(props) {
     const token = localStorage.getItem("jwt")
-
+    const alctualCollective = getActualCollective()
+    const actualGame = getActualGame()
     const [gameDate, setgameDate] = useState('');
     const [whiteScore, setWhiteScore] = useState('');
     const [blackScore, setBlackScore] = useState('');
 
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-   
     const handleSubmit = async (e) => {
         e.preventDefault();
         const body = {
-            id: props.idGame,
+            id: actualGame.idGame,
             whiteScore: whiteScore,
             blackScore: blackScore,
             dateMatch: gameDate
         }
-        console.log(body)
         updateGame(body, token).then((data) =>{
             if(data === "200"){
                 setErrMsg("The collective is saved corectly")
@@ -39,7 +39,7 @@ export default function FormComponentUpdateGame(props) {
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} navi='/collectiveDetail/'/>
+                <MessageComponent message={errMsg} navi={`/collectiveDetail/${alctualCollective}`}/>
                 :
                 null
             }

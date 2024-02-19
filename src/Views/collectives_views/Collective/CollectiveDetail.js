@@ -7,40 +7,26 @@ import ComponentCollectiveDetail from '../../../Components/boxes/componentCollec
 import '../../../assets/styles/principal.css'
 import './collectiveDetail.css'
 import '../../../assets/styles/buttons.css'
-import { getCollectivesByUserEmailAndName } from '../../../Services/collective.service.js';
+import { getCollectivesById } from '../../../Services/collective.service.js';
 
 export default function CollectiveDetail() {
-    const { collectiveName } = useParams();
-
+    const {collectiveId} = useParams()
     const [collectiveStyle, setCollectiveStyle] = useState("boxComponent_collective_oculto")
-    const userEmail = localStorage.getItem("userEmail");
     let token = localStorage.getItem("jwt");
 
     const [collective, setCollective] = useState({});
-    const [dateCreation, setDateCreation] = useState("");
-    const [timeCreation, setTimeCreation] = useState("");
-    const [collectiveId, setCollectiveId] = useState("");
- 
 
     useEffect(() => {
-        let body = {
-            email: userEmail,
-            name: collectiveName
-        }  
-
-        getCollectivesByUserEmailAndName(body, token).then((data) => {
+        getCollectivesById(collectiveId, token).then((data) => {
             if(data !== 'error'){
                 setCollective(data);
-                setCollectiveId(data.id)
-                setDateCreation(data.creationDate.split("T")[0])
-                setTimeCreation(data.creationDate.split("T")[1].split(".")[0])
                 localStorage.setItem('Collective', JSON.stringify(data))
             }else{
                 console.log(data);
             }
         })
             
-    }, [token, userEmail, collectiveName]);
+    }, [token, collectiveId]);
 
 
     const showCollectiveDetails = (e) => {
@@ -59,7 +45,7 @@ export default function CollectiveDetail() {
     return (
         <div className='body_principal'>
             <div className='nuevoBox'>
-                    <p className='title_component'>{collectiveName}</p>
+                    <p className='title_component'>{collective.name}</p>
             </div>
             <div className='nuevoBox1' >
                  <button onClick={showCollectiveDetails} id='btn_show' className='btn_showHide'>Show collective details</button>
@@ -70,21 +56,24 @@ export default function CollectiveDetail() {
                     ? 
                     <ComponentCollectiveDetail 
                     collectiveId={collectiveId} 
-                    collectiveName={collectiveName}
-                    dateCreation={dateCreation}
-                    timeCreation={timeCreation}
+                    collectiveName={collective.name}
+                    dateCreation={collective.dateCreation}
+                    timeCreation={collective.timeCreation}
                     />               
                     : 
-                    <p>No data found for {collectiveName} collective</p>
+                    <p>No data found for {collective.name} collective</p>
                 }           
             </div>   
             <hr />           
             <div className='caja'>
-                <Link to={`/games/${collectiveId}`} className='btn_showHide'>Games</Link>
+                <Link to={'/games'} className='btn_showHide'>Games</Link>
                 <Link to={'/players'} className='btn_showHide'>Players</Link>
+                <Link to={'/fields'} className='btn_showHide'>Fields</Link>
             </div>
-            
         </div>
     )
 }
 
+/*
+ <Link to={`/games/${collectiveId}`} className='btn_showHide'>Games</Link>
+*/

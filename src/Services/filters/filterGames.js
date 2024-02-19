@@ -19,15 +19,13 @@ export const showPlayedGames = (games) => {
     games.map(
         (objA) => new Date() > new Date (objA.dateMatch) ? playedGames.push(objA) : null 
     )
-    console.log(playedGames)
     return playedGames
 }
 
 export const showNotPlayedGames = (games) => {
     const playedGames = [] 
     games.map(
-        (objA) => new Date() > new Date (objA.dateMatch) ? playedGames.push(objA) : null 
+        (objA) => new Date() < new Date (objA.dateMatch) ? playedGames.push(objA) : null 
     )
-    console.log(playedGames)
     return playedGames
 }

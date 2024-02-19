@@ -19,7 +19,7 @@ hr{
 
 
 
-.boxComponent_collective_visto {
+.boxComponent_collective_ {
     width: 80%;
     margin: auto; 
     margin-bottom: 20px;
@@ -28,8 +28,6 @@ hr{
     justify-content: space-evenly;
     align-items: center;
     border-radius: 20px;
-    overflow: hidden;
-    max-height: 450px;
     transition: max-height 1.5s ease-in;
 }
 

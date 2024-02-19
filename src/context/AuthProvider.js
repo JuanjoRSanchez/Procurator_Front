@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-
+import { isAuthenticated } from "../Services/auth/auth.services";
 
 export const AuthContext = createContext();
 
@@ -11,14 +11,17 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
     const [authUser, setAuthUser] = useState(initialAuth);
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated())
+    const jwt = '' 
  
     const value = {
         authUser,
         setAuthUser,
         isLoggedIn,
-        setIsLoggedIn
+        setIsLoggedIn,
+        jwt,
     }
+    console.log(value.isLoggedIn)
     return (
         <AuthContext.Provider value={value}>
             {children}

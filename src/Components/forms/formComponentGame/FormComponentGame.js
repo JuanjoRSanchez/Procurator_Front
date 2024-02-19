@@ -14,7 +14,7 @@ export default function Games(props) {
    
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(gameDate)
         const body = {
             collectiveId: props.idCollective,
             dateMatch: gameDate
@@ -22,7 +22,6 @@ export default function Games(props) {
 
         addGame(body, token)
             .then((data) => {
-                console.log(data)
                 if(data === '200'){
                     setErrMsg("The game is saved corectly")
                     setSucces(true)
@@ -70,4 +69,3 @@ export default function Games(props) {
         </div>
     )
 }
-

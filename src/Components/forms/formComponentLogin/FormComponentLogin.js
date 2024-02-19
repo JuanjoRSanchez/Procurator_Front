@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { login }from '../../../Services/auth.services.js';
+import { login }from '../../../Services/auth/auth.services.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth }  from '../../../context/AuthProvider.js'
 import '../../../assets//styles/forms.css'
@@ -16,8 +16,7 @@ export default function FormComponentLogin() {
     const [errMsg, setErrMsg] = useState('');
     
     const [succes, setSucces] = useState(true);
-
-
+    const context = useAuth()
     useEffect(() => {
         if(userRef != null){
             userRef.current.focus();
@@ -29,34 +28,43 @@ export default function FormComponentLogin() {
         setErrMsg('');
 
     }, [userEmail, password])
-    const { setAuthUser, setIsLoggedIn} = useAuth()
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = {
             email: userEmail,
             password: password
         }
-        const res = await login(user);
-        if(res === "ok"){    
-            setSucces(false);   
-        }else {
-            setAuthUser(res);
-            setIsLoggedIn(true) 
-            navigate("/collectives");
-        }        
+        login(user).then((data) => {
+            if(data.status === "OK"){
+                console.log(data.status)
+                context.setAuthUser(data);
+                context.setIsLoggedIn(true) 
+                navigate("/collectives");
+            }else{
+                console.log(data)
+                setErrMsg("Doesn't exist an User with this credentials")
+                setSucces(false)
+            }
+        }) 
+
+       
     }
 
     return (
         <div className='body_home'>
-            {!succes ? (
+            {!succes 
+            ? 
+            (
                 <section className='body_error'>
                    <h2>Necesitas registrarte<br /></h2>
+                   <p>{errMsg}</p>
                     <span className='line'>
-                        {/* */}
                         <Link to='/register'>Registrarse</Link>
                     </span>
                 </section>
-            ) : (
+            ) 
+            : 
+            (
                 <div className='form_box'>
                     <form className="form" onSubmit={handleSubmit}>
                         <p ref={errRef} className={errMsg ? "errmsg" : "offsscreen"} aria-live="assertive">{errMsg}</p>

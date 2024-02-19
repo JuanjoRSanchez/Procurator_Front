@@ -7,9 +7,7 @@ export default function ComponentGeneralBox(props) {
    
     return (
         <div className='body_componentCollective'>
-            <div className="boxComponentcollective">
                <p className="titleBox"> {props.title}</p>
-            </div>
         </div>
     )
 }

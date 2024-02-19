@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom'
 import './Home.css'
 import '../../assets/styles/buttons.css'
 import '../../assets/styles/principal.css'
-import { logout } from '../../Services/auth.services'
+import { logout } from '../../Services/auth/auth.services'
 
 import Logo from '../../assets/images/Logo_Pena.png'
 
 export default function Home() {
-/*
-    useEffect(() => {
-        logout();
-    });
-*/  
     const handleSingOut = (e) => {
         e.preventDefault();
         logout();

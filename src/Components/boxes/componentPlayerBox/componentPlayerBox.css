@@ -1,30 +1,63 @@
-/* Component Box  */
-.body_componentBox {
-    width: 20%;
-    min-width: 250px;
+.body_playerComponentBox {
+    width: 300px;
     height: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /*border: 1px solid blue;*/
-    border-radius: 20px;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgb(223, 159, 22);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    color: rgb(2, 2, 2);
+    color: rgb(252, 252, 252);
+    margin-bottom: 20px;
+    border: 1px solid rgb(255, 166, 0);
+    border-radius: 10px;
+    padding: 20px;
 }
 
-.boxComponent {
-    width: 25%;
-    min-width: 150px;
-    color: white;
-}
-
-.titleBox{
+.playerBoxComponent {
     width: 100%;
-   /* border: 1px solid red;*/
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.btn_boxPlayer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-bottom: 2px solid white;
+}
+
+.active:before{
+    content: "Active";
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #21be02;
+    text-align: center;
+    color: black;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 10px 10px;
+}
+
+
+.not_active:before{
+    content: "Not active";
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color:  #f7390a;
+    text-align: center;
+    color: black;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 10px 10px;
+}
+
+.red{
     text-align: center;
 }

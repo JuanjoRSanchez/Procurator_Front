@@ -16,8 +16,16 @@ import Players from './Views/players_views/players/Players.js'
 import NewPlayer from './Views/players_views/newPlayer/New_Player.js'
 import { AuthProvider } from './context/AuthProvider';
 import ProtectedRoute  from './ProtectedRoute.jsx'
+import PlayersToGame from './Views/players_views/new_Player_to_Game/playersToGames.js'
+import UpdatePlayer from './Views/players_views/UpdatePlayer/UpdatePlayer.js'
+import PlayerDetail from './Views/players_views/player/PlayerDetail.js'
+import Fields from './Views/field_views/fields/Fields.js'
+import FieldDetail from './Views/field_views/field/FieldDetail.js'
+import NewField from './Views/field_views/newField/NewField.js'
+import UpdateField from './Views/field_views/updateField/UpdateField.js'
 
 function App() { 
+  
   return (
     <BrowserRouter>
         <AuthProvider>
@@ -29,14 +37,21 @@ function App() {
                   <Route element={<ProtectedRoute />}>
                       <Route path='collectives' element={<Collectives />} />
                       <Route path='newCollective' element={<NewCollective />}></Route>
-                      <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
-                      <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
-                      <Route path='games/:idCollective' element={<Games />}></Route>
+                      <Route path='collectiveDetail/:collectiveId' element={<CollectiveDetail />}></Route>
+                      <Route path='updateCollective' element={<UpdateCollective />}></Route>
+                      <Route path='games' element={<Games />}></Route>
                       <Route path='gameDetail' element={<Game />}></Route>
-                      <Route path='newGame/:idCollective' element={<NewGame />}></Route>
-                      <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
+                      <Route path='newGame' element={<NewGame />}></Route>
+                      <Route path='updateGame' element={< Updategame/>}></Route>
                       <Route path='players' element={<Players />}></Route>
                       <Route path='newPlayer' element={<NewPlayer />}></Route>
+                      <Route path='addPlayerToGame' element={<PlayersToGame />}></Route>      
+                      <Route path='playerDetail' element={<PlayerDetail />}></Route>
+                      <Route path='updatePlayer' element={<UpdatePlayer />}></Route>
+                      <Route path='fields' element={<Fields />}></Route>
+                      <Route path='fieldDetail' element={<FieldDetail />}></Route>
+                      <Route path='newField' element={<NewField />}></Route>
+                      <Route path='updateField/:fieldId' element={<UpdateField />}></Route>
                   </Route>                
               </Routes>
           <Footer />

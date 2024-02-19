@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { signUp } from '../../../Services/auth.services.js';
+import { signUp } from '../../../Services/auth/auth.services.js';
 
 import { Link } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ export default function FormComponentPost(props) {
                     <h1>Estás registrado <br /></h1>
                     <br />
                     <span>
-                        <button className='btn_home'><Link to='/collectives' >Ir a inicio</Link></button>
+                        <button className='btn_home'><Link to='/login' >Ir a login</Link></button>
                     </span>
                 </section>
             ) : (

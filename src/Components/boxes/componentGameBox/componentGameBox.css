@@ -6,6 +6,9 @@
     justify-content: center;
     align-items: center;
     color: rgb(252, 252, 252);
+    border: 1px solid rgb(255, 166, 0);
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .gameBoxComponent {
@@ -14,6 +17,7 @@
     padding-bottom: 50px;
     padding: 10px;
     color: rgb(255, 255, 255);
+    text-align: left;
 }
 
 .btn_boxGame{
@@ -23,7 +27,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 10px;
-    border-bottom: 2px solid white;
 }
 
 .played:before{

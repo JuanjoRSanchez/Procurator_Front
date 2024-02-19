@@ -5,19 +5,20 @@ import './collectives.css'
 import BoxCollective from '../../../Components/boxes/componentGenerealBox/boxCollective.js';
  
 import { Link } from 'react-router-dom'
-import { getAllCollectives } from '../../../Services/collective.service';
 import { parseJwt } from '../../../Services/token.service';
+import { getActualToken } from '../../../Services/dataAcces';
+import { getCollectivesByUserEmail } from '../../../Services/collective.service';
 
 export default function Collectives() {
     const [Msg, setMsg] = useState()
 
-    const tokenn = localStorage.getItem('jwt')
-    const email = parseJwt(tokenn).sub
+    const tokenn = getActualToken()
+    let email = parseJwt(tokenn).sub
 
     const [collectives, setCollectives] = useState({});
     
     useEffect(() => {
-        getAllCollectives(tokenn, email)
+        getCollectivesByUserEmail(tokenn, email)
         .then((value) => {
             if(value === 'error'){
                 setMsg("No collectives found")
@@ -32,7 +33,9 @@ export default function Collectives() {
         if(localStorage.getItem('game')){
             localStorage.removeItem('game')
         }
-        
+        if(localStorage.getItem('actualPlayer')){
+            localStorage.removeItem('actualPlayer')
+        }
     }, [tokenn, email]);
     useEffect(() => {
         const actualCollective = localStorage.getItem('actualCollective')
@@ -51,9 +54,8 @@ export default function Collectives() {
                     {
                         collectives
                         ?
-                        Array.from(collectives).map((collective) => {
-                            
-                            return <Link className='boxComponent_collective' key={collective.id} to={`/collectiveDetail/${collective.name}`}>
+                        Array.from(collectives).map((collective) => { 
+                            return <Link className='boxComponent_collective' key={collective.id} to={`/collectiveDetail/${collective.id}`}>
                                         <BoxCollective key={collective.id} title={collective.name} idCollective={collective.id} />
                                    </Link>;
                         })

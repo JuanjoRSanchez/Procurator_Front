@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import '../../../assets/styles/principal.css'
 import './games.css'
@@ -11,11 +11,12 @@ import imageArrow from '../../../assets/images/icons8-chevron-abajo-en-círculo-
 
 import ComponentGameBox from '../../../Components/boxes/componentGameBox/ComponentGameBox.js';
 import { getGames } from '../../../Services/games.services.js';
-import { showNotPlayedGames, showPlayedGames } from '../../../Services/filters/filterGames';
+import { orderGamesByMayorDate, orderGamesByMinorDate, showNotPlayedGames, showPlayedGames } from '../../../Services/filters/filterGames';
+import { getActualCollective } from '../../../Services/dataAcces';
 
 export default function Games() {
-    const { idCollective } = useParams();
-    const idActualCollective = JSON.parse(localStorage.getItem('Collective')).id
+    const idActualCollective = getActualCollective()
+
     let token = localStorage.getItem("jwt");
 
     const [games, setGames] = useState(null);
@@ -35,7 +36,7 @@ export default function Games() {
             localStorage.removeItem('game')
         }
     }, [token, idActualCollective]);
-
+/*
     const saveGameData = (game) => {
         const actualGame = {
             idGame : game.id,
@@ -44,11 +45,11 @@ export default function Games() {
             gameCreationDate : game.creationDate.split('T')[0],
             gameDate : game.dateMatch.split(' ')[0],
             gameHour : game.dateMatch.split(' ')[1],
-            idCollective : idCollective
+            idCollective : idActualCollective
         }
         window.localStorage.setItem('game', JSON.stringify(actualGame))
     }
-
+*/
     const toggleFilters = () => {
         if(filters.getAttribute('class') === 'filter_options_hide'){
             filters.classList.remove('filter_options_hide')
@@ -58,38 +59,33 @@ export default function Games() {
             filters.classList.add('filter_options_hide')
         }
     }
-    
-    const orderGamesByMinorDate = () => {
-        setGames(orderGamesByMayorDate(games))
+
+    const orderByMinorDate = () => {
+        setGames(orderGamesByMinorDate(games))
     }
 
-    const orderGamesByMayorDate = () => {
+    const orderByMayorDate = () => {
         setGames(orderGamesByMayorDate(games))
     }
 
     const showPlayed = () => {
-        setGames(showPlayedGames(games))
+        getGames(idActualCollective, token).then((data) => {
+            setGames(showPlayedGames(data))
+        })
     }
 
     const showNotPlayed = () => {
-        setGames(showNotPlayedGames(games))
+        getGames(idActualCollective, token).then((data) => {
+            setGames(showNotPlayedGames(data))
+        })
     }
-/*
-    const orderGamesByascendentID = () => {
-        setGames(games.sort(
-        (objA, objB) => objA.id - objB.id,
-        ))
-        console.log('result')
-        console.log(games)
-      
-    }
-*/
+
     return (
         <div className='body_principal'>
             <div className='collective_games'>
                 <p className='titulo'>Games</p>
                 <div>
-                    <Link to={`/newGame/${idCollective}`} className='btn_showHide'>Add new game</Link>
+                    <Link to={'/newGame'} className='btn_showHide'>Add new game</Link>
                 </div>
             </div>
             <hr />    
@@ -100,8 +96,8 @@ export default function Games() {
                 </div>
                 <img src={imageArrow} className='imageArrow' alt='icono menú'  onClick={toggleFilters}/>
                 <div className='filter_options_hide' id='filters'>
-                    <button className='filter' onClick={orderGamesByMinorDate}>⇩ Date</button>
-                    <button className='filter' onClick={orderGamesByMayorDate}>⇧ Date</button>
+                    <button className='filter' onClick={orderByMinorDate}>⇩ Date</button>
+                    <button className='filter' onClick={orderByMayorDate}>⇧ Date</button>
                     <button className='filter' onClick={showPlayed}>Played</button>
                     <button className='filter' onClick={showNotPlayed}>Not played</button>
                 </div>
@@ -111,7 +107,7 @@ export default function Games() {
                 games
                 ?
                 Array.from(games).map((game) => {
-                    return <div className='boxComponent_game' to={'/gameDetail'} key={game.id}  onClick={saveGameData(game)} > 
+                    return <div className='boxComponent_game' to={'/gameDetail'} key={game.id}   > 
                                     <ComponentGameBox 
                                         key={game.id} 
                                         idGame={game.id}
@@ -120,7 +116,7 @@ export default function Games() {
                                         gameCreationDate={game.creationDate.split('T')[0]}
                                         gameDate={game.dateMatch.split(' ')[0]}
                                         gameHour={game.dateMatch.split(' ')[1]}
-                                        idCollective={idCollective}
+                                        idCollective={idActualCollective}
                                     />
                             </div>
                 })

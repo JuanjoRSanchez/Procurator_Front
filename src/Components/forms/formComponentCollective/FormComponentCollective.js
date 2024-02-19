@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addCollective } from '../../../Services/collective.service.js';
-//import { showMsgForExitingAction } from '../../../Services/message.service.js';
-
 
 export default function Partidos() {
     const email = localStorage.getItem("userEmail")
@@ -12,12 +10,8 @@ export default function Partidos() {
     
     const [collectiveName, setCollectiveName] = useState('');
     const [errMsg, setErrMsg] = useState(false);
-    //const [okMsg, setOkMsg] = useState(false)
     const [succes, setSucces] = useState(false);
 
-    useEffect(() => {
-        collectiveNameRef.current.focus();
-    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,8 +25,6 @@ export default function Partidos() {
             if(response === 200){
                 setErrMsg("The collective is saved corectly")
                 setCollectiveName("")
-                //showMsgForExitingAction(errMsg)   
-                //setOkMsg(true)  
                 setSucces(true)
             }else{
                 setErrMsg("The collective is not saved correctly")

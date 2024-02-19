@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from "react";
 
-
 import './componentGameBox.css'
+import '../../../assets/styles/principal.css'
 import '../../../assets/styles/buttons.css'
 import ButtonDetails from "../../button_detail/ButtonsDetails";
-
 
 export default function ComponentGameBox(props) {
     const box = useRef(null)
@@ -17,7 +16,6 @@ export default function ComponentGameBox(props) {
     const notPlayed_Class = 'body_gameComponentBox not_played'
     const gameDate = props.gameDate
     
-  
     useEffect(() => {
         const dateGame = new Date(gameDate);
         const actualDate = new Date()
@@ -28,16 +26,14 @@ export default function ComponentGameBox(props) {
         }
     }, [gameDate, box, played_Class, notPlayed_Class ]);
     
-
-   
     return (
             <div ref={box} >
-                <div className="gameBoxComponent">
+                <div className="gameBoxComponent fontBox">
                     <p>Game id: {props.idGame}</p>
                     <p>Game date: {props.gameDate}</p> 
-                    <p>Game date: {props.gameHour}</p> 
+                    <p>Game hour: {props.gameHour}</p> 
                 </div> 
-                <ButtonDetails entity={entity} infoEntity={infoEntity} linkToBack={linkToBack} linkToUpdate={linkToUpdate} detail={detail}/>
+                <ButtonDetails entity={entity} infoEntity={infoEntity} linkToBack={linkToBack} linkToUpdate={linkToUpdate} detail={detail} infoEntityAll={props}/>
             </div>
     )
 }

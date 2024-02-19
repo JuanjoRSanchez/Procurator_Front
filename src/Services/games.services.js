@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:9011/api/v1/games";
+const API_URL = "http://localhost:9011/api/v1/game";
 
 export const getGames = async (collective_id, token) => {
-    const action = '/getGames/'
+    const action = '/findByCollectiveId/'
     const resp = await axios({
         method: 'GET',
         url: API_URL + action + collective_id,
@@ -16,14 +16,13 @@ export const getGames = async (collective_id, token) => {
             return response.data;
         }
         ).catch((error) => {
-            console.log(error)
             return error.response.status;
         });  
     return resp
 }
 
 export const addGame = async (game, token) => {
-    const action = '/addGame'
+    const action = '/'
     const resp = await axios({
         method: 'POST',
         url: API_URL + action,
@@ -34,7 +33,6 @@ export const addGame = async (game, token) => {
         data: game
         })
         .then((response) => {
-            console.log(response.request.status)
             return JSON.stringify(response.request.status);
         }
         ).catch((error) => {
@@ -45,7 +43,7 @@ export const addGame = async (game, token) => {
 
 
 export const updateGame = async (game, token) => {
-    const action = '/update'
+    const action = '/'
     const resp = await axios({
         method: 'PUT',
         url: API_URL + action,
@@ -56,7 +54,6 @@ export const updateGame = async (game, token) => {
         data: game
         })
         .then((response) => {
-            console.log(response)
             return JSON.stringify(response.request.status);
         }
         ).catch((error) => {
@@ -66,7 +63,7 @@ export const updateGame = async (game, token) => {
 }
 
 export const deleteGame = async (idGame, token) => {
-    const action = '/deleteGame/'
+    const action = '/'
     const resp = await axios({
         method: 'DELETE',
         url: API_URL + action + idGame,
@@ -76,12 +73,9 @@ export const deleteGame = async (idGame, token) => {
         },
         })
         .then((response) => {
-            console.log(response.request.status)
             return JSON.stringify(response.request.status);
         }
         ).catch((error) => {
-            console.log(error)
-
             return error.response.status;
         });  
     return resp;
