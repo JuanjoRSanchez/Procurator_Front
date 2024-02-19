@@ -16,6 +16,7 @@ export const getGames = async (collective_id, token) => {
             return response.data;
         }
         ).catch((error) => {
+            console.log(error)
             return error.response.status;
         });  
     return resp
@@ -79,6 +80,8 @@ export const deleteGame = async (idGame, token) => {
             return JSON.stringify(response.request.status);
         }
         ).catch((error) => {
+            console.log(error)
+
             return error.response.status;
         });  
     return resp;

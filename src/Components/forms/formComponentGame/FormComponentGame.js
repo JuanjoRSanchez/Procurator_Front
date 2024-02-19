@@ -11,7 +11,6 @@ export default function Games(props) {
     const [gameDate, setgameDate] = useState();
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
-
    
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,7 +40,7 @@ export default function Games(props) {
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg}  />
+                <MessageComponent message={errMsg}  navi='/games'/>
                 :
                 null
             }

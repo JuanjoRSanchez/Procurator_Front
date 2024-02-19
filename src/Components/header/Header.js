@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from 'react-router-dom'
-import { isTokenExpired, logout } from "../../Services/auth.services";
-
+import { isAuthenticated, logout } from "../../Services/auth.services";
 import { useAuth } from '../../context/AuthProvider.js'
 import Logo from '../../assets/images/Logo_Pena.png'
 import './header.css'
@@ -9,20 +8,22 @@ import './header.css'
 export default function Header(){
 
     const navigate = useNavigate();
-
-    let userIn = localStorage.getItem("userEmail");
+    const { isLoggedIn, authUser } = useAuth()
+    let userIn = false
     let userName = localStorage.getItem("userName");
     let helloMessage = `Hello ${userName}`
-    let token = "";
-    if(localStorage.getItem("jwt")){ token = localStorage.getItem("jwt")}
-    let tokeenExpired = false;
-    if(token){
-        tokeenExpired = isTokenExpired(token) ? "LogIn" : "Logout" ;
-    }else{
-        userIn = ""
-    }
     const { setAuthUser, setIsLoggedIn} = useAuth()
-
+    let isAuth = ''
+    //console.log(isLoggedIn)
+    //console.log(authUser)
+    if(isLoggedIn){
+         isAuth = isAuthenticated(authUser) ? "Logout" : "LogIn";
+    }
+    
+    if(isAuth === 'Logout'){
+         userIn = true
+    }
+    
     const handleLogOut = (e) => {
         e.preventDefault();
         setAuthUser({})
@@ -45,7 +46,7 @@ export default function Header(){
                            <button> <Link to={'/collectives'}>Home</Link></button>
                         </div>
                         <div className="user_boxLogButton">
-                            <button onClick={handleLogOut}>{tokeenExpired}</button>
+                            <button onClick={handleLogOut}>{isAuth}</button>
                         </div>
                     </div>
                         : 

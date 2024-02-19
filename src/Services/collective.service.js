@@ -36,6 +36,7 @@ export  const getCollectivesByUserEmailAndName = async (body ,token) => {
             data: body
             })
             .then((response) => {
+
                 return response.data;
             }
             ).catch((error) => {
@@ -62,14 +63,14 @@ export const addCollective = async (collective, token) => {
         })
         .then((response) => {
             console.log(response)
-            return JSON.stringify(response.data.status);     
+            return JSON.parse(response.status);     
         }).catch((error) => {
-            return error.response.status;
+            return error.status;
 
         })
         return resp
     }catch(error){
-
+        return error
     }
    
 }
@@ -101,10 +102,12 @@ export const updateCollective = async (collective, token) => {
 
 
 export const deleteCollective = async (collective, token) => {
-    try{
+    const action = "/deleteCollective"
+
+  
         const resp = await axios({
             method: 'DELETE',
-            url: API_URL,
+            url: API_URL + action,
             headers: {
             "Authorization": `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -112,17 +115,15 @@ export const deleteCollective = async (collective, token) => {
             data: collective
             })
             .then((response) => {
-                return response.request.status;
+                return JSON.stringify(response.request.status);
             }
             ).catch((error) => {
                 return error.response.status;
             });  
             return resp
-    }
-    catch(error){
-        return error
-    }
-    
 }
+   
+    
+
 
 

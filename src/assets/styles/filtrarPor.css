@@ -1,0 +1,101 @@
+.box_filtro{
+    width: 80%;
+    margin: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid rgb(255, 255, 255);
+    overflow: hidden;
+}
+
+.filter_title{
+    height: auto;
+    font-size: 1.5rem;
+    margin-left: 15px;
+}
+
+.filter_title>p{
+    width: auto;
+    font-size: 1.5rem;
+
+}
+
+.imageArrow{
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: white;
+    border-radius: 20px;
+    transform: rotate(-90deg);
+    margin-left: 15px;
+}
+
+.imageArrow:hover{
+    /*
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 25px;
+    */
+    animation: mymove 5s alternate;
+
+}
+
+
+@keyframes mymove {
+    50% {transform: rotate(90deg);}
+}
+
+.filter_options_show{
+    overflow: hidden;
+    width: 70%;
+    min-width: 300px;
+    height: 75px;
+    color: white;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: all 3s linear;
+
+}
+
+.filter_options_hide{
+    width: 0;
+    height: 75px;
+    visibility: hidden;
+}
+
+.filter{
+    font-size: 1rem;
+    background-color: black;
+    color: aliceblue;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 425px){
+    .filter{
+        font-size: 0.7rem;
+    }
+    .filter_options_show{
+        overflow: hidden;
+        width: 300px;
+        height: 75px;
+        color: white;
+        border: 1px solid rgb(76, 0, 255);
+        display: flex;
+        align-items: center;
+        justify-content:  space-evenly;
+        margin: auto;
+        /*transition: all 2s linear;*/
+        transition: all 3s linear;
+    
+    }
+    
+    .filter_title>p{
+        font-size: 1rem;
+    
+
+    }
+}

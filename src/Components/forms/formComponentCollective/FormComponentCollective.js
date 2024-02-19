@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addCollective } from '../../../Services/collective.service.js';
+//import { showMsgForExitingAction } from '../../../Services/message.service.js';
 
 
 export default function Partidos() {
@@ -11,6 +12,7 @@ export default function Partidos() {
     
     const [collectiveName, setCollectiveName] = useState('');
     const [errMsg, setErrMsg] = useState(false);
+    //const [okMsg, setOkMsg] = useState(false)
     const [succes, setSucces] = useState(false);
 
     useEffect(() => {
@@ -24,11 +26,13 @@ export default function Partidos() {
             name: collectiveName
         }
 
-        addCollective(body, token).then((data) =>{
-            console.log(data)
-            if(data === '200'){
+        addCollective(body, token).then((response) =>{
+            console.log(response)
+            if(response === 200){
                 setErrMsg("The collective is saved corectly")
-                setCollectiveName("")      
+                setCollectiveName("")
+                //showMsgForExitingAction(errMsg)   
+                //setOkMsg(true)  
                 setSucces(true)
             }else{
                 setErrMsg("The collective is not saved correctly")

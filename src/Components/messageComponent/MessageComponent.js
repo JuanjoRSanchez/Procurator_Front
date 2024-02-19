@@ -10,17 +10,20 @@ export default function MessageComponent(prop) {
         messageClass = 'btn_alert_notOk'
         messageBox_class = 'box_message_notOk'
     }
-    const actualCollective = localStorage.getItem('actualCollective')
+    const collectiveId = JSON.parse(localStorage.getItem('Collective')).id
     const redirection = (e) => {
         e.preventDefault()
-        console.log(prop.navi)
-        if(prop.navi === '/collectiveDetail/'){
-            navigate(prop.navi + actualCollective)
-        }if (prop.navi === '/collectives') {
+        if(prop.navi === null){
+            navigate(prop.navi)
+        }else if(prop.navi === '/collectives'){
+            navigate(prop.navi)
+        }else if(prop.navi === '/games'){
+            navigate(prop.navi + '/' + collectiveId)
+        }else if(prop.navi === '/players'){
             navigate(prop.navi)
         }
-        else{
-            window.location.reload()
+        else {
+            navigate(prop.navi + '/' + collectiveId)
         }
     }
 

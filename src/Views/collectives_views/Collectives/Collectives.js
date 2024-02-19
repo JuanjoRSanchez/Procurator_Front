@@ -2,7 +2,6 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import '../../../assets/styles/principal.css'
 import './collectives.css'
-//import AuthContext from '../../../context/AuthProvider';
 import BoxCollective from '../../../Components/boxes/componentGenerealBox/boxCollective.js';
  
 import { Link } from 'react-router-dom'
@@ -10,7 +9,6 @@ import { getAllCollectives } from '../../../Services/collective.service';
 import { parseJwt } from '../../../Services/token.service';
 
 export default function Collectives() {
-
     const [Msg, setMsg] = useState()
 
     const tokenn = localStorage.getItem('jwt')
@@ -28,7 +26,12 @@ export default function Collectives() {
                 setCollectives(value)
             }
         }) 
-        
+        if(localStorage.getItem('Collective')){
+            localStorage.removeItem('Collective')
+        }
+        if(localStorage.getItem('game')){
+            localStorage.removeItem('game')
+        }
         
     }, [tokenn, email]);
     useEffect(() => {
@@ -50,7 +53,7 @@ export default function Collectives() {
                         ?
                         Array.from(collectives).map((collective) => {
                             
-                            return <Link key={collective.id} to={`/collectiveDetail/${collective.name}`}>
+                            return <Link className='boxComponent_collective' key={collective.id} to={`/collectiveDetail/${collective.name}`}>
                                         <BoxCollective key={collective.id} title={collective.name} idCollective={collective.id} />
                                    </Link>;
                         })

@@ -1,7 +1,7 @@
 import React from 'react'
-import '../../assets/styles/principal.css'
+import '../../../assets/styles/principal.css'
 import { useParams } from 'react-router-dom'
-import FormUpdateGame from '../../Components/forms/formComponentGame/formComponentUpdateGame.js'
+import FormUpdateGame from '../../../Components/forms/formComponentGame/formComponentUpdateGame.js'
 
 export default function Updategame() {
     const { idGame } = useParams()

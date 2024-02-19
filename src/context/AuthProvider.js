@@ -10,11 +10,9 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({children}) => {
-
     const [authUser, setAuthUser] = useState(initialAuth);
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
-
-    
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+ 
     const value = {
         authUser,
         setAuthUser,

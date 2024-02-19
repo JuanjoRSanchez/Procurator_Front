@@ -3,8 +3,6 @@ import { Buffer } from 'buffer';
 
 const API_URL = "http://localhost:9011/api/v1/auth";
 
-
-
 export function signUp(user) {
       axios.post(API_URL + "/register", JSON.stringify(user),
                 {
@@ -75,28 +73,3 @@ export function isAuthenticated (){
     }
  }
 
-
-/*
-const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
- }
-
- const authHeader = () => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    if(user && user.accessToken){
-        return {"x-auth-token": user.accessToken}
-    }else{
-        return {};
-    }
- }
-*/
-/*
- const authService = {
-    signUp,
-    login,
-    logout,
-    isTokenExpired,
-    getTokenDate
- }
-*/
- // export default authService;

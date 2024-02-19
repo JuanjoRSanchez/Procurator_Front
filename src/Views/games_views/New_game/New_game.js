@@ -1,7 +1,7 @@
 import React from 'react'
-import '../../assets/styles/principal.css'
+import '../../../assets/styles/principal.css'
 import { useParams } from 'react-router-dom'
-import FormGame from '../../Components/forms/formComponentGame/FormComponentGame.js'
+import FormGame from '../../../Components/forms/formComponentGame/FormComponentGame.js'
 
 export default function Newgame() {
     const { idCollective } = useParams()

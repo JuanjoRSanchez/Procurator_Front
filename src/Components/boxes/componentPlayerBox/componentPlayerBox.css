@@ -1,27 +1,30 @@
 /* Component Box  */
-.body_componentCollective {
+.body_componentBox {
     width: 20%;
-    min-width: 150px;
+    min-width: 250px;
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 15px 5px;
+    /*border: 1px solid blue;*/
     border-radius: 20px;
-    background-color: rgb(124, 125, 211);
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(223, 159, 22);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: rgb(2, 2, 2);
-    margin: 10px 10px;
 }
 
-.boxComponentcollective {
-    text-decoration: none;
+.boxComponent {
+    width: 25%;
+    min-width: 150px;
+    color: white;
 }
 
 .titleBox{
     width: 100%;
    /* border: 1px solid red;*/
     text-align: center;
-    color: aliceblue;
-    font-size: 0.8rem;
 }

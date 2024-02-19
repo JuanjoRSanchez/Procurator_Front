@@ -17,3 +17,13 @@ export const useLocalStorage = (key, defaultValue) => {
 
   return [value, setValue];
 };
+
+export const getActualIdCollective = () => {
+  const idCollective = JSON.parse(localStorage.getItem('Collective')).id
+  return idCollective 
+}
+
+export const getActualIdGame = () => {
+  const idCollective = JSON.parse(localStorage.getItem('game')).id
+  return idCollective 
+}

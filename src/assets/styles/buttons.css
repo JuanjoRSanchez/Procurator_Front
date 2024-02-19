@@ -128,3 +128,11 @@
     text-decoration: none;
  
 }
+
+
+.btn_box{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
