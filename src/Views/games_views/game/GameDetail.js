@@ -26,7 +26,7 @@ export default function Game(props) {
                 }
             }
             else{
-                setMsg(`You don't have players yet`)
+                setMsg(`You don't have players on this collective yet `)
             }
         })
     }, [idActualGame, token])

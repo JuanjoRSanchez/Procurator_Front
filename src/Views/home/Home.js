@@ -30,7 +30,6 @@ export default function Home() {
                     <button className='btn_home' onClick={handleSingOut}><Link to='/login' >Login</Link></button>
                     <button className='btn_home'><Link to='/register' >Registrarse</Link></button>
                 </div>
-                
             </div>
     )
 
