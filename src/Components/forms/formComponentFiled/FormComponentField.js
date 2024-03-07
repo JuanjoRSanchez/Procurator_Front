@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addField } from '../../../Services/field.service.js';
-import { getActualCollective } from '../../../Services/dataAcces.js';
+import { getJwt, getActualCollectiveId } from '../../../Services/sessionStorage.service.js';
 
 export default function FormComponentField() {
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
 
     const [fieldName, setFieldName] = useState('');
     const [fieldPhone, setFieldPhone] = useState('');
     const [fieldAddress, setFieldAddress] = useState('');
     const [fieldContatPhone, setFieldContactPhone] = useState('');
-    const actualCollective = getActualCollective()
+    const actualCollective = getActualCollectiveId()
 
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
@@ -52,10 +52,10 @@ export default function FormComponentField() {
             <div className='form_box'>
                 <form className="form" onSubmit={handleSubmit}>
                     <div className="titleContainer">
-                        <h1 className="title">Collectives information</h1>
+                        <h1 className="title">Field information</h1>
                     </div>
                     <div className="inputContainer">
-                        <label htmlFor="name" className="label">Collective name:</label>
+                        <label htmlFor="name" className="label">Field name:</label>
                         <input
                             type="text"
                             id='name'
@@ -64,7 +64,7 @@ export default function FormComponentField() {
                             required
                             className="input"
                         />
-                        <label htmlFor="address" className="label">Collective address:</label>
+                        <label htmlFor="address" className="label">Field address:</label>
                         <input
                             type="text"
                             id='address'
@@ -73,7 +73,7 @@ export default function FormComponentField() {
                             required
                             className="input"
                         />
-                        <label htmlFor="name" className="label">Collective phone:</label>
+                        <label htmlFor="name" className="label">Field phone:</label>
                         <input
                             type="text"
                             id='phone'
@@ -82,7 +82,7 @@ export default function FormComponentField() {
                             required
                             className="input"
                         />
-                        <label htmlFor="contactPhone" className="label">Collective contact phone:</label>
+                        <label htmlFor="contactPhone" className="label">Field contact phone:</label>
                         <input
                             type="text"
                             id='contactPhone'

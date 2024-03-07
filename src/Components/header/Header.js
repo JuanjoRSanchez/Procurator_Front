@@ -4,22 +4,23 @@ import { logout } from "../../Services/auth/auth.services";
 import { useAuth } from '../../context/AuthProvider.js'
 import Logo from '../../assets/images/Logo_Pena.png'
 import './header.css'
+import { getUserName } from "../../Services/sessionStorage.service.js";
 
 export default function Header(){
+    
 
     const navigate = useNavigate();
 
     let userIn = false
-    let userName = localStorage.getItem("userName");
+    let userName = getUserName();
     let helloMessage = `Hello ${userName}`
     const context = useAuth()
     let isAuth = ''
-    if(context.isLoggedIn){
-         isAuth = context.isLoggedIn ? "Logout" : "LogIn";
-    }
-    
+    isAuth = context.isLoggedIn ? "Logout" : "LogIn";
     if(isAuth === 'Logout'){
-         userIn = true
+         userIn = true    
+    }else{
+        logout()
     }
     
     const handleLogOut = (e) => {

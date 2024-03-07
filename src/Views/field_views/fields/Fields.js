@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { getActualCollective, getActualToken } from '../../../Services/dataAcces'
 import { useAuth } from '../../../context/AuthProvider'
 import { getFieldsByCollectiveId } from '../../../Services/field.service'
 import ComponentFieldDetail from '../../../Components/boxes/componentFieldDetail/ComponentFieldDetail'
+import { getActualCollectiveId, getJwt } from '../../../Services/sessionStorage.service'
 
 export default function Fields(){
     const navigate = useNavigate();
@@ -13,8 +13,8 @@ export default function Fields(){
         navigate("/")
     } 
 
-    const idActualCollective = getActualCollective()
-    const token = getActualToken()
+    const idActualCollective = getActualCollectiveId()
+    const token = getJwt()
 
     const [fields, setFields ] = useState({})
     const [msg, setMsg] = useState('')
@@ -23,6 +23,7 @@ export default function Fields(){
         getFieldsByCollectiveId(idActualCollective, token).then((data) =>{
             if(data.status === 200){
                 if(data.data !== null){
+                    console.log(data.data)
                     setFields(data.data)
                 }else{
                     setMsg(`You don't have players yet`)
@@ -51,6 +52,9 @@ export default function Fields(){
                                     key={field.id} 
                                     idField={field.id}
                                     name={field.name}
+                                    fieldPhone={field.phone}
+                                    contactPhone={field.contactPhone}
+
                                 />
                     })
                     :

@@ -6,11 +6,12 @@ import '../../../assets/styles/buttons.css'
 
 import MessageComponent from "../../messageComponent/MessageComponent";
 import { deletePlayer } from "../../../Services/players.service";
+import { getActualPlayer, getJwt } from "../../../Services/sessionStorage.service";
 
 export default function ComponentPlayerDetail(props) {
 
-    const token = localStorage.getItem("jwt") 
-    const actualPlayer = JSON.parse(localStorage.getItem('actualPlayer'))
+    const token = getJwt()
+    const actualPlayer = getActualPlayer()
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
 

@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import './playersToGame.css'
-import { getActualCollective, getActualGame } from '../../../Services/dataAcces'
 import { getPlayersNotAddedToGame } from '../../../Services/players.service'
 import ComponentPlayerToGameBox from '../../../Components/boxes/componentPlayerToGameBox/ComponentPlayerToGameBox'
+import { getActualCollective, getActualGame, getJwt } from '../../../Services/sessionStorage.service'
 
 export default function PlayersToGame(){
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
     const idCollective = getActualCollective()
-    const idActualGame = getActualGame()
+    const actualGame = getActualGame()
+    console.log(actualGame)
+    const idActualGame = actualGame.idGame
+
     const [msg, setMsg] = useState('')
 
     const [players, setPlayers] = useState(null)

@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addCollective } from '../../../Services/collective.service.js';
+import { getJwt, getUserEmail } from '../../../Services/sessionStorage.service.js';
 
 export default function Partidos() {
-    const email = localStorage.getItem("userEmail")
-    const token = localStorage.getItem("jwt")
+    const email = getUserEmail()
+    const token = getJwt()
 
     const collectiveNameRef = useRef();
     

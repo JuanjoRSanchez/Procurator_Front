@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../../assets/styles/principal.css'
 import FormGame from '../../../Components/forms/formComponentGame/FormComponentGame.js'
-import { getActualCollective } from '../../../Services/dataAcces'
+import { getActualCollective } from '../../../Services/sessionStorage.service.js'
 
 export default function Newgame() {
     const actualCollective = getActualCollective()

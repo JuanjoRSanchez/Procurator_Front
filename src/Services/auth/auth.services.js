@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Buffer } from 'buffer';
-import { getActualToken, getActualUserName } from "../dataAcces";
+import { setJwt, setUserEmail, setUserName, getActualUserName, getActualToken } from "../sessionStorage.service";
 
 const API_URL = "http://localhost:9011/api/v1/auth";
 
@@ -11,16 +11,16 @@ export function signUp(user) {
                 }
                 ).then((response) => {
                     console.log(response)
-                    localStorage.setItem("userEmail", user.email)        
-                    localStorage.setItem("jwt", response.data.token)
-                    localStorage.setItem("userName", user.name);
-                    
+ 
+                    setUserEmail(user.email)        
+                    setJwt(response.data.token)
+                    setUserName(user.name);
+
                 }).catch((error) => {
                     console.log(error)
                     return "error";
                 });               
 }
-
 
 export  const login = async (user) => {
     const action = "/authenticate"
@@ -33,10 +33,9 @@ export  const login = async (user) => {
         data: user
         })
         .then((response) => {
-            localStorage.setItem("userEmail", user.email)        
-            localStorage.setItem("jwt", response.data.token)
-            localStorage.setItem("userName", response.data.userName);
-            console.log(response.data)
+            setUserEmail(user.email)        
+            setJwt(response.data.token)
+            setUserName(response.data.userName);
             return response.data  
         }
         ).catch((error) => {
@@ -47,11 +46,13 @@ export  const login = async (user) => {
 }
 
 export  function  logout()  {
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("jwt")
-    localStorage.removeItem("userName")
-    localStorage.removeItem("Collective")
-    localStorage.removeItem("game")
+
+    sessionStorage.removeItem("useEmail");
+    sessionStorage.removeItem("jwt")
+    sessionStorage.removeItem("userName")
+    sessionStorage.removeItem("Collective")
+    sessionStorage.removeItem("game")
+
 }
 
  export function getTokenDate(token) {
@@ -75,16 +76,13 @@ export function isAuthenticated (){
     let userName = getActualUserName()
     let jwt = getActualToken()
     let jwtCheck = null;
-    if(jwt === null){
-        console.log('eeeeeee')
-    }else{
+    if(jwt != null){
         jwtCheck = isTokenExpired(jwt);
-        if(userName !== null && jwtCheck !== null ){
+        if(userName !== null && jwtCheck ){
             return true
         }else{
             return false;
         }
     }
-    
     
  }

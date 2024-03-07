@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './players.css'
 import ComponentPlayerBox from '../../../Components/boxes/componentPlayerBox/ComponentPlayerBox'
 import { getPlayersByCollective } from '../../../Services/players.service'
-import { getActualCollective, getActualToken } from '../../../Services/dataAcces'
-import { useAuth } from '../../../context/AuthProvider'
+import { getActualCollective } from '../../../Services/dataAcces'
 import { orderPlayersByMajorDate, orderPlayersByMinorDate, showActivePlayers, showNotActivePlayers } from '../../../Services/filters/filterPlayers'
 import imageArrow from '../../../assets/images/icons8-chevron-abajo-en-círculo-64.png'
+import { getActualToken } from '../../../Services/sessionStorage.service'
 
 export default function Players(){
-    const navigate = useNavigate();
-
-    const context = useAuth()
-    if(!context.isLoggedIn){
-        navigate("/")
-    } 
+    
     const filters = document.getElementById('filters')
 
     const idActualCollective = getActualCollective()

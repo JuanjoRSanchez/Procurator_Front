@@ -5,13 +5,13 @@ import '../../../assets/styles/buttons.css'
 import ComponentGameDetail from "../../../Components/boxes/componentGameDetail/ComponentGameDetail";
 import { getPlayersAddedToGame } from "../../../Services/players.service";
 import { Link } from "react-router-dom";
-import { getActualIdGame } from "../../../Services/dataAcces";
 import ComponentPlayerToGameBox from "../../../Components/boxes/componentPlayerToGameBox/ComponentPlayerToGameBox";
+import { getJwt, getActualIdGame, getActualGame } from "../../../Services/sessionStorage.service";
 
 
 export default function Game(props) {
-    const token = localStorage.getItem("jwt")
-    const game = localStorage.getItem('game')
+    const token = getJwt()
+    const game = getActualGame()
 
     const idActualGame = getActualIdGame()
     const [msg, setMsg] = useState('')

@@ -13,7 +13,6 @@ export  const getCollectivesByUserEmail = async (token, user_email) => {
         },
         })
         .then((response) => {
-
             return response.data;
         }
         ).catch((error) => {
@@ -25,6 +24,7 @@ export  const getCollectivesByUserEmail = async (token, user_email) => {
 
 export  const getCollectivesById = async (collectiveId ,token) => {
     const action = "/"
+
     try{
         const response = await axios({
             method: 'GET',
@@ -74,10 +74,12 @@ export const addCollective = async (collective, token) => {
 }
 
 export const updateCollective = async (collective, token) => {
+    const action = "/"
+
     try{
         const resp = await axios({
             method: 'PUT',
-            url: API_URL ,
+            url: API_URL + action,
             headers: {
             "Authorization": `Bearer ${token}`,
             'Content-Type': 'application/json'

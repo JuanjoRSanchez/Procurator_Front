@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addGame } from '../../../Services/games.services.js';
+import { getJwt } from '../../../Services/sessionStorage.service.js';
 
 
 export default function Games(props) {
-    const token = localStorage.getItem("jwt")
-
+    const token = getJwt
     const gameDateRef = useRef();
     
     const [gameDate, setgameDate] = useState();

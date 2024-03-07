@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { addPlayerToCollective } from '../../../Services/players.service.js';
-import { getActualIdCollective } from '../../../Services/localStorage.service.js';
+import { getJwt } from '../../../Services/sessionStorage.service.js';
 
 
 export default function FormComponentPlayer(props) {
-    const token = localStorage.getItem("jwt")
-    const idCollective = getActualIdCollective();
+    const token = getJwt()
+    const idCollective = props.idActualCollective;
 
     const [nombre, setNombre] = useState('');
     const [edad, setEdad] = useState('');

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { updateGame } from '../../../Services/games.services.js';
-import { getActualCollective, getActualGame } from '../../../Services/dataAcces.js';
+import { getJwt, getActualGame, getActualCollective } from '../../../Services/sessionStorage.service.js';
 
 
 export default function FormComponentUpdateGame(props) {
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
     const alctualCollective = getActualCollective()
     const actualGame = getActualGame()
     const [gameDate, setgameDate] = useState('');

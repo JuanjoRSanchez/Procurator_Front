@@ -2,10 +2,10 @@ import React from 'react'
 import '../../../assets/styles/principal.css'
 
 import FormComponentCollectiveUpdate from '../../../Components/forms/formComponentCollective/FormComponentColletiveUpdate.js'
-import { getActualCollective } from '../../../Services/dataAcces'
+import { getActualCollectiveId } from '../../../Services/sessionStorage.service.js'
 
 export default function UpdateCollective() {
-    const actualCollective = getActualCollective()
+    const actualCollective = getActualCollectiveId()
 
     return (
         <div className='body_home'>

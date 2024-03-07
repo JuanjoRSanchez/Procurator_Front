@@ -13,11 +13,12 @@ import ComponentGameBox from '../../../Components/boxes/componentGameBox/Compone
 import { getGames } from '../../../Services/games.services.js';
 import { orderGamesByMayorDate, orderGamesByMinorDate, showNotPlayedGames, showPlayedGames } from '../../../Services/filters/filterGames';
 import { getActualCollective } from '../../../Services/dataAcces';
+import { getActualGame, getJwt } from '../../../Services/sessionStorage.service.js';
 
 export default function Games() {
     const idActualCollective = getActualCollective()
 
-    let token = localStorage.getItem("jwt");
+    let token = getJwt()
 
     const [games, setGames] = useState(null);
     const [message, setMessage] = useState('')
@@ -32,24 +33,11 @@ export default function Games() {
                 setGames(data)
             }
         })
-        if(localStorage.getItem('game')){
-            localStorage.removeItem('game')
+        if(getActualGame()){
+            sessionStorage.removeItem('game')
         }
     }, [token, idActualCollective]);
-/*
-    const saveGameData = (game) => {
-        const actualGame = {
-            idGame : game.id,
-            scoreWhite : game.whiteScore,
-            scoreBlack : game.blackScore,
-            gameCreationDate : game.creationDate.split('T')[0],
-            gameDate : game.dateMatch.split(' ')[0],
-            gameHour : game.dateMatch.split(' ')[1],
-            idCollective : idActualCollective
-        }
-        window.localStorage.setItem('game', JSON.stringify(actualGame))
-    }
-*/
+
     const toggleFilters = () => {
         if(filters.getAttribute('class') === 'filter_options_hide'){
             filters.classList.remove('filter_options_hide')

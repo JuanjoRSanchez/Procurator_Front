@@ -1,7 +1,6 @@
 import React from 'react'
 import './messageComponent.css'
 import { useNavigate } from 'react-router-dom'
-// import { getActualCollective } from '../../Services/dataAcces';
 
 export default function MessageComponent(prop) {
     const navigate = useNavigate();
@@ -12,27 +11,9 @@ export default function MessageComponent(prop) {
         messageBox_class = 'box_message_notOk'
     }
 
-    // const collectiveId = getActualCollective()
     const redirection = (e) => {
         e.preventDefault()
         navigate(prop.navi)
-        /*
-        if(prop.navi === null){
-            navigate(prop.navi)
-        }else if(prop.navi === '/collectives'){
-            navigate(prop.navi)
-        }else if(prop.navi === '/games'){
-            navigate(prop.navi )
-        }else if(prop.navi === '/players'){
-            navigate(prop.navi)
-        }else if(prop.navi === '/fields'){
-            navigate('/fields')
-        }
-        else {
-            navigate(prop.navi)
-        }
-        */
-        
     }
 
     return (

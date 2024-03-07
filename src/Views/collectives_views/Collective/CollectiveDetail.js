@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
 import ComponentCollectiveDetail from '../../../Components/boxes/componentCollectiveDetail/ComponentCollectiveDetail.js';
 
@@ -8,11 +8,15 @@ import '../../../assets/styles/principal.css'
 import './collectiveDetail.css'
 import '../../../assets/styles/buttons.css'
 import { getCollectivesById } from '../../../Services/collective.service.js';
+import { logout } from '../../../Services/auth/auth.services.js';
+import { getJwt, setActualCollective } from '../../../Services/sessionStorage.service.js';
 
 export default function CollectiveDetail() {
+    const navigate = useNavigate();
+
     const {collectiveId} = useParams()
     const [collectiveStyle, setCollectiveStyle] = useState("boxComponent_collective_oculto")
-    let token = localStorage.getItem("jwt");
+    let token = getJwt();
 
     const [collective, setCollective] = useState({});
 
@@ -20,13 +24,15 @@ export default function CollectiveDetail() {
         getCollectivesById(collectiveId, token).then((data) => {
             if(data !== 'error'){
                 setCollective(data);
-                localStorage.setItem('Collective', JSON.stringify(data))
+                setActualCollective(data)
             }else{
+                logout()
+                navigate("/")
                 console.log(data);
             }
         })
             
-    }, [token, collectiveId]);
+    }, [token, collectiveId, navigate]);
 
 
     const showCollectiveDetails = (e) => {

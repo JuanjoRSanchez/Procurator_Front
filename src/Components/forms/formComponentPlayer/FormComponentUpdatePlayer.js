@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { updatePlayer } from '../../../Services/players.service.js';
-import { getActualPlayer } from '../../../Services/dataAcces.js';
+import { getActualPlayer, getJwt } from '../../../Services/sessionStorage.service.js';
 
 
 export default function FormComponentUpdatePlayer(props) {
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
     const actualPlayer = getActualPlayer();
 
     const [nombre, setNombre] = useState('');

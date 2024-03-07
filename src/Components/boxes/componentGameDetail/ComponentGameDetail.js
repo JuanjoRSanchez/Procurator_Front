@@ -6,11 +6,11 @@ import '../../../assets/styles/buttons.css'
 
 import { deleteGame } from "../../../Services/games.services";
 import MessageComponent from "../../messageComponent/MessageComponent";
-import { getActualGame } from "../../../Services/dataAcces";
+import { getJwt, getActualGame } from '../../../Services/sessionStorage.service'
 
 export default function ComponentGameDetail(props) {
 
-    const token = localStorage.getItem("jwt") 
+    const token = getJwt() 
     const game = getActualGame()
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
@@ -19,7 +19,8 @@ export default function ComponentGameDetail(props) {
        
         deleteGame(game.idGame, token)
         .then((value) => {
-            if(value === 200){
+            console.log(value)
+            if(value === "200"){
                 setErrMsg("The collective is deleted corectly")
                 setSucces(true)
             }else{

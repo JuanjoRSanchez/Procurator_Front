@@ -4,46 +4,52 @@ import '../../../assets/styles/principal.css'
 import './collectives.css'
 import BoxCollective from '../../../Components/boxes/componentGenerealBox/boxCollective.js';
  
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { parseJwt } from '../../../Services/token.service';
-import { getActualToken } from '../../../Services/dataAcces';
+import { getActualCollective, getActualGame, getActualPlayer, getJwt } from '../../../Services/sessionStorage.service.js';
 import { getCollectivesByUserEmail } from '../../../Services/collective.service';
+import { logout } from '../../../Services/auth/auth.services.js';
 
 export default function Collectives() {
+
+    const navigate = useNavigate();
     const [Msg, setMsg] = useState()
 
-    const tokenn = getActualToken()
+    const tokenn = getJwt()
     let email = parseJwt(tokenn).sub
 
     const [collectives, setCollectives] = useState({});
     
     useEffect(() => {
+
+        const actualCollective = getActualCollective()
+        if(actualCollective){
+            sessionStorage.removeItem('actualCollective')
+        }
+
         getCollectivesByUserEmail(tokenn, email)
         .then((value) => {
             if(value === 'error'){
+             
                 setMsg("No collectives found")
                 setCollectives('')
+                logout()
+                navigate("/")
             }else{
                 setCollectives(value)
             }
         }) 
-        if(localStorage.getItem('Collective')){
-            localStorage.removeItem('Collective')
+        if(getActualCollective('Collective')){
+            sessionStorage.removeItem('Collective')
         }
-        if(localStorage.getItem('game')){
-            localStorage.removeItem('game')
+        if(getActualGame('game')){
+            sessionStorage.removeItem('game')
         }
-        if(localStorage.getItem('actualPlayer')){
-            localStorage.removeItem('actualPlayer')
-        }
-    }, [tokenn, email]);
-    useEffect(() => {
-        const actualCollective = localStorage.getItem('actualCollective')
-        if(actualCollective){
-            localStorage.removeItem('actualCollective')
+        if(getActualPlayer('actualPlayer')){
+            sessionStorage.removeItem('actualPlayer')
         }
         
-    }, [tokenn, email]);
+    }, [tokenn, email, navigate]);
 
     return (
         <div className='body_home'>        

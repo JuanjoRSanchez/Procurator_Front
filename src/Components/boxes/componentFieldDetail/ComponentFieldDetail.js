@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteField } from "../../../Services/field.service";
 import MessageComponent from "../../messageComponent/MessageComponent";
+import { getJwt } from "../../../Services/sessionStorage.service";
 
 export default function ComponentFieldDetail(props) {
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
     const [errMsg, setErrMsg] = useState('');
     const [succes, setSucces] = useState(false);
 
@@ -12,7 +13,6 @@ export default function ComponentFieldDetail(props) {
         e.preventDefault();
         deleteField(props.idField, token)
             .then((data) => {
-                console.log(data)
                 if(data.status === 200){
                     setErrMsg("Field deleted correctly.")
                     setSucces(true)
@@ -39,8 +39,12 @@ export default function ComponentFieldDetail(props) {
                     <div className="fontBox">
                         <p>Field Id: </p>   
                         <p>{props.idField}</p>   
-                        <p>Field name: </p>   
-                        <p>{props.name}</p> 
+                        <p>Field name:</p>   
+                        <p>{props.name}</p>
+                        <p>Field phone: </p>   
+                        <p>{props.fieldPhone}</p> 
+                        <p>Contact phone: </p>   
+                        <p>{props.contactPhone}</p> 
                     </div>
                 </div>
                 <hr/>

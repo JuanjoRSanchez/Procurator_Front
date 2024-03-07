@@ -28,6 +28,7 @@ export default function FormComponentLogin() {
         setErrMsg('');
 
     }, [userEmail, password])
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = {
@@ -35,13 +36,11 @@ export default function FormComponentLogin() {
             password: password
         }
         login(user).then((data) => {
+            console.log('eeeeeeeeeeeee')
             if(data.status === "OK"){
-                console.log(data.status)
-                context.setAuthUser(data);
                 context.setIsLoggedIn(true) 
                 navigate("/collectives");
             }else{
-                console.log(data)
                 setErrMsg("Doesn't exist an User with this credentials")
                 setSucces(false)
             }

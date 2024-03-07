@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getActualIdGame } from "../../../Services/dataAcces";
 import { addPlayerToGame, deletePlayerFromGame } from "../../../Services/players.service";
-
+import { getActualIdGame } from "../../../Services/sessionStorage.service";
 import './componentPlayerToGameBox.css'
+import { useNavigate } from "react-router-dom";
 
 export default function ComponentPlayerToGameBox(props) {
+    const navigate = useNavigate();
+
     const idActualGame = getActualIdGame()
     const token = localStorage.getItem("jwt")
 
@@ -36,7 +38,7 @@ export default function ComponentPlayerToGameBox(props) {
                 console.log("Error")
             }
         })
-        document.location.reload()
+        navigate('/addPlayerToGame')
     }
 
     const takeOutPlayer = () => {

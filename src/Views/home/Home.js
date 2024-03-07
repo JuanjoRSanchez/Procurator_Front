@@ -8,10 +8,14 @@ import { logout } from '../../Services/auth/auth.services'
 import Logo from '../../assets/images/Logo_Pena.png'
 
 export default function Home() {
+
+    
+
     const handleSingOut = (e) => {
         e.preventDefault();
         logout();
     }
+
     return (
             <div className='body_home'>
                 <div className='logoBox'>

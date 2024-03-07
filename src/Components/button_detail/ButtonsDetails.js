@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import '../../assets/styles/buttons.css'
+import { setActualGame, setActualPlayer } from "../../Services/sessionStorage.service";
 
 export default function ButtonDetails(props) {
     
@@ -8,10 +9,10 @@ export default function ButtonDetails(props) {
     props.detail ? detail = props.detail : detail = null
 
     const saveActualPlayer = () => {
-        localStorage.setItem('actualPlayer', JSON.stringify(props.infoEntityAll))
+        setActualPlayer(props.infoEntityAll)
     }
     const saveActualGame = () => {
-        localStorage.setItem('game', JSON.stringify(props.infoEntityAll))
+        setActualGame(props.infoEntityAll)
     }
     return(
         <>

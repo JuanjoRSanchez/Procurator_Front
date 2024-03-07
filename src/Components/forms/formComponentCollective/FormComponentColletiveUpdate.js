@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MessageComponent from '../../messageComponent/MessageComponent.js';
 import { updateCollective } from '../../../Services/collective.service.js';
+import { getJwt, getUserEmail } from '../../../Services/sessionStorage.service.js';
 
 
 export default function FormComponentCollectiveUpdate(props) {
-    const email = localStorage.getItem("userEmail")
-    const token = localStorage.getItem("jwt")
+    const email = getUserEmail()
+    const token = getJwt()
 
     const collectiveNameRef = useRef();
     
@@ -42,46 +43,12 @@ export default function FormComponentCollectiveUpdate(props) {
         collectiveNameRef.current.focus();
     }
 
-    /*
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const body = {
-            email: email,
-            name: collectiveName
-        }
-        const resp = await axios({
-            method: 'PUT',
-            url: baseURL,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            },
-            data: body
-            })
-            .then((response) => {
-                
-                setErrMsg("The collective is updated corectly")
-                setSucces(true)
-                setCollectiveName("")      
-                return JSON.stringify(response.data);     
-            }
-            ).catch((error) => {
-                setErrMsg("The collective is not updated correctly")
-                setSucces(true)
-                setCollectiveName("")
-                return error.response.status;
-            });  
-            console.log(resp)
-         
-            collectiveNameRef.current.focus();
-    }
-    */
     return (
         <div> 
             {
                 succes 
                 ?
-                <MessageComponent message={errMsg} />
+                <MessageComponent message={errMsg} navi={'/collectives'} />
                 :
                 null
             }
