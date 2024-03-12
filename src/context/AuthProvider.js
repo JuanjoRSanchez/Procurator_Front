@@ -1,23 +1,35 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { isAuthenticated } from "../Services/auth/auth.services";
+import { getJwt, getUserEmail, getUserName } from "../Services/sessionStorage.service";
+// import { getJwt } from "../Services/sessionStorage.service";
 
 export const AuthContext = createContext();
 
-const initialAuth = null;
+const initialAuth = true;
 
 export const useAuth = () => {
     return useContext(AuthContext)
 }
 
 export const AuthProvider = ({children}) => {
-    
+
     const [authUser, setAuthUser] = useState(initialAuth);
     const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated())
+    const [userName, setUserName] = useState(getUserName())
+    const [userEmail, setUserEmail] = useState(getUserEmail())
+    const [jwt, setJwt] = useState(getJwt())
 
+    useEffect(() => {
+        console.log(sessionStorage.length);
 
-    // const [authUser, setAuthUser] = useState(initialAuth);
-    // const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated())
-    let jwt = '';
+        console.log("Desde Provider")
+        if(!isLoggedIn){
+            setIsLoggedIn(false)
+            setAuthUser(false)
+            setUserName(null)
+            setUserEmail(null)
+        }
+    }, [isLoggedIn])
     
     const value = {
         authUser,
@@ -25,8 +37,12 @@ export const AuthProvider = ({children}) => {
         isLoggedIn,
         setIsLoggedIn,
         jwt,
+        setJwt,
+        userName,
+        setUserName,
+        userEmail,
+        setUserEmail
     }
-    
 
     return (
         <AuthContext.Provider value={value}>

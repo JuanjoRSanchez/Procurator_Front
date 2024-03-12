@@ -35,18 +35,20 @@ export default function FormComponentLogin() {
             email: userEmail,
             password: password
         }
+        console.log(user)
         login(user).then((data) => {
-            console.log('eeeeeeeeeeeee')
             if(data.status === "OK"){
+                console.log(data)
                 context.setIsLoggedIn(true) 
+                context.setUserEmail(user.email)
+                context.setJwt(data.token)
+                context.setUserName(data.userName)
                 navigate("/collectives");
             }else{
                 setErrMsg("Doesn't exist an User with this credentials")
                 setSucces(false)
             }
         }) 
-
-       
     }
 
     return (

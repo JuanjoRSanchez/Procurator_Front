@@ -18,7 +18,7 @@ export default function ComponentPlayerDetail(props) {
     const handleDeletePlayer = (e) => {
         e.preventDefault();
        
-        deletePlayer(actualPlayer.idPlayer, token)
+        deletePlayer(parseInt(actualPlayer.idPlayer), token)
         .then((data) => {
             if(data.status === 200){
                 setErrMsg("The collective is deleted corectly")

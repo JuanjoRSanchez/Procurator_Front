@@ -29,22 +29,22 @@ export function getUserEmail(){
     return sessionStorage.getItem('useEmail' )
 }
 
-export function setActualCollective(idCollective){
+export function setActualCollective(Collective){
     try{
-        sessionStorage.setItem('Collective', JSON.stringify(idCollective))
+        sessionStorage.setItem('Collective', JSON.stringify(Collective))
     }catch(error){
         console.log(error)
     }
 }
 
 export const getActualCollective = () => {
-    let idActualCollective = '';
+    let actualCollective = '';
     try{
-        idActualCollective = JSON.parse(sessionStorage.getItem('Collective'))
+        actualCollective = JSON.parse(sessionStorage.getItem('Collective'))
     }catch(error){
         console.log(error)
     }
-    return idActualCollective
+    return actualCollective
 }
 
 export const getActualCollectiveId = () => {

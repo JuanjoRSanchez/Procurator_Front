@@ -21,10 +21,10 @@ export default function ComponentGameDetail(props) {
         .then((value) => {
             console.log(value)
             if(value === "200"){
-                setErrMsg("The collective is deleted corectly")
+                setErrMsg("The game has been deleted corectly")
                 setSucces(true)
             }else{
-                setErrMsg("The collective is not deleted correctly")
+                setErrMsg("The game has not been deleted correctly")
                 setSucces(true)
             }         
         })       

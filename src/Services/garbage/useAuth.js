@@ -73,6 +73,7 @@ export const useAuth = () => {
     }
 
     return { login, logout, signUp, getTokenDate, isTokenExpired, getCurrentUser };
+    
 }
 
 

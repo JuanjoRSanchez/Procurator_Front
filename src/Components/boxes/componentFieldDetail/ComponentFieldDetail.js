@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteField } from "../../../Services/field.service";
 import MessageComponent from "../../messageComponent/MessageComponent";
-import { getJwt } from "../../../Services/sessionStorage.service";
+import { getActualCollectiveId, getJwt } from "../../../Services/sessionStorage.service";
 
 export default function ComponentFieldDetail(props) {
     const token = getJwt()
     const [errMsg, setErrMsg] = useState('');
     const [succes, setSucces] = useState(false);
+    const actualCollectiveId = getActualCollectiveId()
 
     const handleDeleteField = (e) => {
         e.preventDefault();
@@ -30,7 +31,7 @@ export default function ComponentFieldDetail(props) {
             {
             succes 
             ?
-            <MessageComponent message={errMsg} navi="/fields" />
+            <MessageComponent message={errMsg} navi={`/collectiveDetail/${actualCollectiveId}`} />
             :
             null
             }

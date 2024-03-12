@@ -17,7 +17,6 @@ export const getPlayersByCollective = async (idCollective, token) => {
                 return response.data;
             }
             ).catch((error) => {
-                
                 return error;
         })
     return respon;
@@ -69,8 +68,8 @@ export const getPlayersAddedToGame = async (idGame, token) => {
 
 export const getPlayersNotAddedToGame = async (idActualGame, idCollective, token) => {
     const action = "/findNotAddedToGame/"
-    console.log(idActualGame)
-    console.log(API_URL + action + idActualGame + '/' + idCollective )
+    // console.log(idActualGame)
+    // console.log(API_URL + action + idActualGame + '/' + idCollective )
 
     const response = await axios({
         method: 'GET',
@@ -84,7 +83,7 @@ export const getPlayersNotAddedToGame = async (idActualGame, idCollective, token
             return response.data;
         }
         ).catch((error) => {
-            console.log(error)
+            // console.log(error)
             return "error";
     })
     return response;
@@ -106,7 +105,6 @@ export const addPlayerToCollective = async (body, token) => {
             }
             ).catch((error) => {
                 console.log(error.message)
-                // if(error.message === )
                  return error;
         })
    
@@ -196,7 +194,7 @@ export const deletePlayer = async (playerId, token) =>{
             },
             })
             .then((response) => {
-                return response.data;
+                return response;
             }
             ).catch((error) => {
                 return error.response.status;

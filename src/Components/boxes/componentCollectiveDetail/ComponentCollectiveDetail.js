@@ -4,33 +4,35 @@ import '../../../assets/styles/buttons.css'
 import { deleteCollectiveById } from '../../../Services/collective.service';
 import { Link } from 'react-router-dom';
 import MessageComponent from '../../messageComponent/MessageComponent';
-import { useState } from 'react';
-import { getJwt } from '../../../Services/sessionStorage.service'
+import { getActualCollective, getJwt } from '../../../Services/sessionStorage.service';
 
 
-export default function ComponentCollectiveDetail(props) {
+export default function ComponentCollectiveDetail() {
 
+    let errMsg = false;
+    let succes= false;
     const token = getJwt()
-    const [errMsg, setErrMsg] = useState(false);
-    const [succes, setSucces] = useState(false);
+    const collective = getActualCollective()
+    const date = collective.creationDate.split('T')[0]
+    const time = collective.creationDate.split('T', 8)[1].split('.')[0]
 
     const handleDelete = (e) => {
         e.preventDefault()
-        deleteCollectiveById(props.collectiveId, token)
+        deleteCollectiveById(collective.id, token)
             .then((data) => {
+                console.log(data)
                 if(data === 400){
-                    setErrMsg("Collective not deleted correctly")
-                    setSucces(true)
+                    errMsg = "Collective not deleted correctly"
+                    succes = true
                 }else{
-                    setErrMsg("Collective deleted correctly")
-                    setSucces(true)  
+                    errMsg = "Collective deleted correctly"
+                    succes = true
                 }
             }).catch((error) => {
-                console.log(error)
+                console.log('From component: ' + error)
             })
     }
-
-
+ 
     return (
         <>
             {
@@ -43,12 +45,12 @@ export default function ComponentCollectiveDetail(props) {
             <div className='collectiveDetail'>
                 <div className="boxComponent">
                     <div>
-                        <p>Collective name: {props.collectiveName}</p>   
-                        <p>Collective Id: {props.collectiveId}</p> 
+                        <p>Collective name: {collective.name}</p>   
+                        <p>Collective Id: {collective.id}</p> 
                     </div>
                     <div>
-                        <p>Creation date: {props.dateCreation}</p> 
-                        <p>Creation time: {props.timeCreation}</p> 
+                        <p>Creation date: {date}</p> 
+                        <p>Creation time: {time}</p> 
                     </div>
                 </div>
                 <hr/>

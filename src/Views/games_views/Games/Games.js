@@ -12,12 +12,10 @@ import imageArrow from '../../../assets/images/icons8-chevron-abajo-en-círculo-
 import ComponentGameBox from '../../../Components/boxes/componentGameBox/ComponentGameBox.js';
 import { getGames } from '../../../Services/games.services.js';
 import { orderGamesByMayorDate, orderGamesByMinorDate, showNotPlayedGames, showPlayedGames } from '../../../Services/filters/filterGames';
-import { getActualCollective } from '../../../Services/dataAcces';
-import { getActualGame, getJwt } from '../../../Services/sessionStorage.service.js';
+import { getActualCollectiveId, getActualGame, getJwt } from '../../../Services/sessionStorage.service.js';
 
 export default function Games() {
-    const idActualCollective = getActualCollective()
-
+    const idActualCollective = getActualCollectiveId()
     let token = getJwt()
 
     const [games, setGames] = useState(null);

@@ -62,28 +62,3 @@ function App() {
 
 export default App;
 
-/*
-<Routes>
-    <Route path='/' element={<Home />}></Route>
-    <Route path='login' element={<Login />}></Route>
-    <Route path='register' element={<Register />}></Route>
-    <Route element={<ProtectedRoute />}>
-        <Route path='collectives' element={<Collectives />} />
-        <Route path='newCollective' element={<NewCollective />}></Route>
-        <Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
-        <Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
-        <Route path='newGame/:idCollective' element={<NewGame />}></Route>
-        <Route path='updateGame/:idGame' element={< Updategame/>}></Route>
-        <Route path='mierda' element={<Mierda />}></Route>
-    </Route>                
-</Routes>
-
-
-
-<Route path='newCollective' element={<NewCollective />}></Route>
-<Route path='collectiveDetail/:collectiveName' element={<CollectiveDetail />}></Route>
-<Route path='updateCollective/:idCollective' element={<UpdateCollective />}></Route>
-<Route path='newGame/:idCollective' element={<NewGame />}></Route>
-<Route path='updateGame/:idGame' element={< Updategame/>}></Route>
-<Route path='mierda' element={<Mierda />}></Route>
-*/

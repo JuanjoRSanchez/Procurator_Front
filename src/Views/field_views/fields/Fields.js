@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../context/AuthProvider'
+import { Link } from 'react-router-dom'
 import { getFieldsByCollectiveId } from '../../../Services/field.service'
 import ComponentFieldDetail from '../../../Components/boxes/componentFieldDetail/ComponentFieldDetail'
 import { getActualCollectiveId, getJwt } from '../../../Services/sessionStorage.service'
 
 export default function Fields(){
-    const navigate = useNavigate();
-
-    const context = useAuth()
-    if(!context.isLoggedIn){
-        navigate("/")
-    } 
-
+   
     const idActualCollective = getActualCollectiveId()
     const token = getJwt()
 

@@ -24,28 +24,24 @@ export  const getCollectivesByUserEmail = async (token, user_email) => {
 
 export  const getCollectivesById = async (collectiveId ,token) => {
     const action = "/"
-
-    try{
-        const response = await axios({
-            method: 'GET',
-            url: API_URL + action + collectiveId ,
-            headers: {
-            "Authorization": `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            }})
-            .then((response) => {
-
-                return response.data;
-            }
-            ).catch((error) => {
-                console.log(error)
-                return  "error";
-        });  
-        return response;
-    }catch(error){
-
-    }
+    const response = await axios({
+        method: 'GET',
+        url: API_URL + action + collectiveId ,
+        headers: {
+        "Authorization": `Bearer ${token}`,
+        'Content-Type': 'application/json'
+        },
+        })
+        .then((response) => {
+            return response.data;
+        }
+        ).catch((error) => {
+            return  "error";
+    });  
+    return response;
+    
 }
+
 
 export const addCollective = async (collective, token) => {
     const action = '/addCollective'
@@ -60,7 +56,6 @@ export const addCollective = async (collective, token) => {
         data: collective
         })
         .then((response) => {
-            console.log(response)
             return JSON.parse(response.status);     
         }).catch((error) => {
             return error.status;

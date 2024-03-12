@@ -3,17 +3,16 @@ import { Link } from 'react-router-dom'
 import './players.css'
 import ComponentPlayerBox from '../../../Components/boxes/componentPlayerBox/ComponentPlayerBox'
 import { getPlayersByCollective } from '../../../Services/players.service'
-import { getActualCollective } from '../../../Services/dataAcces'
 import { orderPlayersByMajorDate, orderPlayersByMinorDate, showActivePlayers, showNotActivePlayers } from '../../../Services/filters/filterPlayers'
 import imageArrow from '../../../assets/images/icons8-chevron-abajo-en-círculo-64.png'
-import { getActualToken } from '../../../Services/sessionStorage.service'
+import { getActualCollectiveId, getJwt } from '../../../Services/sessionStorage.service'
 
 export default function Players(){
     
     const filters = document.getElementById('filters')
 
-    const idActualCollective = getActualCollective()
-    const token = getActualToken()
+    const idActualCollective = getActualCollectiveId()
+    const token = getJwt()
 
     const [players, setPlayers ] = useState({})
     const [msg, setMsg] = useState('')

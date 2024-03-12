@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { addPlayerToGame, deletePlayerFromGame } from "../../../Services/players.service";
-import { getActualIdGame } from "../../../Services/sessionStorage.service";
+import { getActualIdGame, getJwt } from "../../../Services/sessionStorage.service";
 import './componentPlayerToGameBox.css'
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export default function ComponentPlayerToGameBox(props) {
     const navigate = useNavigate();
 
     const idActualGame = getActualIdGame()
-    const token = localStorage.getItem("jwt")
+    const token = getJwt()
 
     const activePlayerClass = 'body_playerToGameComponentBox active'
     const notActivePlayerclass = 'body_playerToGameComponentBox not_active'
@@ -30,7 +30,6 @@ export default function ComponentPlayerToGameBox(props) {
         addedToGame: true
     }
     const addToGame = () => {
-        console.log(body)
         addPlayerToGame(body, token).then((data) => {
             if(data.status === 200){
                 setInOrOut(data)
@@ -38,18 +37,19 @@ export default function ComponentPlayerToGameBox(props) {
                 console.log("Error")
             }
         })
-        navigate('/addPlayerToGame')
+        navigate('/gameDetail')
     }
 
-    const takeOutPlayer = () => {
-        deletePlayerFromGame(idActualGame, props.idPlayer, token).then((data) => {
+    const takeOutPlayerFromGame = () => {
+        deletePlayerFromGame(idActualGame,  props.idPlayer.toString(), token).then((data) => {
             if(data !== ''){
                 setInOrOut(data)
             }else{
                 console.log(`You don't have players yet`)
             }
         })
-        document.location.reload()
+        navigate('/games')
+        // document.location.reload()
     }
     return (
         <div id='ele' className={classElement} >
@@ -61,7 +61,7 @@ export default function ComponentPlayerToGameBox(props) {
                 {
                     InOrOut
                     ?
-                    <button className="btn_home" onClick={takeOutPlayer}>Get out of the game</button>
+                    <button className="btn_home" onClick={takeOutPlayerFromGame}>Get out of this game</button>
                     :
                     <button  className='btn_home' onClick={addToGame}>Add to game</button>
                 }

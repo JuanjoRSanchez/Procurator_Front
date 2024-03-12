@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Buffer } from 'buffer';
-import { setJwt, setUserEmail, setUserName, getActualUserName, getActualToken } from "../sessionStorage.service";
+import { getJwt, getUserEmail, setJwt, setUserEmail, setUserName } from "../sessionStorage.service";
 
 const API_URL = "http://localhost:9011/api/v1/auth";
 
@@ -11,10 +11,9 @@ export function signUp(user) {
                 }
                 ).then((response) => {
                     console.log(response)
- 
-                    setUserEmail(user.email)        
+                    setUserName(response.data.userName)
                     setJwt(response.data.token)
-                    setUserName(user.name);
+                    setUserEmail(user.email)
 
                 }).catch((error) => {
                     console.log(error)
@@ -23,6 +22,7 @@ export function signUp(user) {
 }
 
 export  const login = async (user) => {
+    console.log(user)
     const action = "/authenticate"
     const resp = await axios({
         method: 'POST',
@@ -33,9 +33,11 @@ export  const login = async (user) => {
         data: user
         })
         .then((response) => {
-            setUserEmail(user.email)        
+            console.log(response)
+            setUserName(response.data.userName)
             setJwt(response.data.token)
-            setUserName(response.data.userName);
+            setUserEmail(user.email)
+
             return response.data  
         }
         ).catch((error) => {
@@ -47,12 +49,14 @@ export  const login = async (user) => {
 
 export  function  logout()  {
 
-    sessionStorage.removeItem("useEmail");
-    sessionStorage.removeItem("jwt")
-    sessionStorage.removeItem("userName")
-    sessionStorage.removeItem("Collective")
-    sessionStorage.removeItem("game")
-
+    sessionStorage.removeItem('useEmail')
+    sessionStorage.removeItem('jwt')
+    sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('Collective_id')
+    sessionStorage.removeItem('Collective')
+    sessionStorage.removeItem('game')
+    sessionStorage.removeItem('actualPlayer')
+    
 }
 
  export function getTokenDate(token) {
@@ -63,18 +67,9 @@ export  function  logout()  {
     return exp;
 }
 
-export function isTokenExpired(token) {
-    const payloadBase64 = token.split('.')[1];
-    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
-    const decoded = JSON.parse(decodedJson)
-    const exp = decoded.exp;
-    const expired = (Date.now() >= exp * 1000)
-    return expired
-  }
-
 export function isAuthenticated (){
-    let userName = getActualUserName()
-    let jwt = getActualToken()
+    let userName = getUserEmail("useEmail");
+    let jwt = getJwt("jwt");
     let jwtCheck = null;
     if(jwt != null){
         jwtCheck = isTokenExpired(jwt);
@@ -84,5 +79,17 @@ export function isAuthenticated (){
             return false;
         }
     }
-    
- }
+}
+
+ export function isTokenExpired(token) {
+    const payloadBase64 = token.split('.')[1];
+    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+    const decoded = JSON.parse(decodedJson)
+    const exp = decoded.exp;
+    const date = new Date(exp)
+    const nonExpired = (Date.now() >= date)
+    return nonExpired
+  }
+
+
+ 

@@ -5,7 +5,7 @@ import { getJwt } from '../../../Services/sessionStorage.service.js';
 
 
 export default function Games(props) {
-    const token = getJwt
+    const token = getJwt()
     const gameDateRef = useRef();
     
     const [gameDate, setgameDate] = useState();
@@ -14,9 +14,8 @@ export default function Games(props) {
    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(gameDate)
         const body = {
-            collectiveId: props.idCollective,
+            collectiveId: parseInt(props.idCollective),
             dateMatch: gameDate
         }
 

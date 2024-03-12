@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react'
 import './playersToGame.css'
 import { getPlayersNotAddedToGame } from '../../../Services/players.service'
 import ComponentPlayerToGameBox from '../../../Components/boxes/componentPlayerToGameBox/ComponentPlayerToGameBox'
-import { getActualCollective, getActualGame, getJwt } from '../../../Services/sessionStorage.service'
+import { getActualCollectiveId, getActualGame, getJwt } from '../../../Services/sessionStorage.service'
 
 export default function PlayersToGame(){
     const token = getJwt()
-    const idCollective = getActualCollective()
+    const idCollective = getActualCollectiveId()
     const actualGame = getActualGame()
-    console.log(actualGame)
     const idActualGame = actualGame.idGame
 
     const [msg, setMsg] = useState('')
@@ -23,7 +22,7 @@ export default function PlayersToGame(){
                 }
             }
             else{
-                setMsg(`There are no players left to add in this collective`)
+                setMsg(`There are no players in this collective to add in this game`)
             }
         })
     }, [idActualGame, idCollective, token])

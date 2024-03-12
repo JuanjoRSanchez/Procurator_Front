@@ -1,40 +1,18 @@
 import React from 'react'
-import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import { Link } from 'react-router-dom'
 
 import ComponentCollectiveDetail from '../../../Components/boxes/componentCollectiveDetail/ComponentCollectiveDetail.js';
 
 import '../../../assets/styles/principal.css'
 import './collectiveDetail.css'
 import '../../../assets/styles/buttons.css'
-import { getCollectivesById } from '../../../Services/collective.service.js';
-import { logout } from '../../../Services/auth/auth.services.js';
-import { getJwt, setActualCollective } from '../../../Services/sessionStorage.service.js';
+import { getActualCollective } from '../../../Services/sessionStorage.service.js';
 
-export default function CollectiveDetail() {
-    const navigate = useNavigate();
-
-    const {collectiveId} = useParams()
+export default function CollectiveDetail(props) {
     const [collectiveStyle, setCollectiveStyle] = useState("boxComponent_collective_oculto")
-    let token = getJwt();
-
-    const [collective, setCollective] = useState({});
-
-    useEffect(() => {
-        getCollectivesById(collectiveId, token).then((data) => {
-            if(data !== 'error'){
-                setCollective(data);
-                setActualCollective(data)
-            }else{
-                logout()
-                navigate("/")
-                console.log(data);
-            }
-        })
-            
-    }, [token, collectiveId, navigate]);
-
-
+    let collective = {};
+    
     const showCollectiveDetails = (e) => {
         e.preventDefault()
         let btn = document.getElementById('btn_show')
@@ -47,6 +25,8 @@ export default function CollectiveDetail() {
         }
 
     }
+    
+    collective = getActualCollective()
 
     return (
         <div className='body_principal'>
@@ -61,10 +41,6 @@ export default function CollectiveDetail() {
                     collective 
                     ? 
                     <ComponentCollectiveDetail 
-                    collectiveId={collectiveId} 
-                    collectiveName={collective.name}
-                    dateCreation={collective.dateCreation}
-                    timeCreation={collective.timeCreation}
                     />               
                     : 
                     <p>No data found for {collective.name} collective</p>
@@ -80,6 +56,3 @@ export default function CollectiveDetail() {
     )
 }
 
-/*
- <Link to={`/games/${collectiveId}`} className='btn_showHide'>Games</Link>
-*/

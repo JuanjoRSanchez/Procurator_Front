@@ -73,7 +73,6 @@ export const deleteGame = async (idGame, token) => {
         },
         })
         .then((response) => {
-            console.log(response)
             return JSON.stringify(response.request.status);
         }
         ).catch((error) => {
