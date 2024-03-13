@@ -35,7 +35,6 @@ export default function FormComponentLogin() {
             email: userEmail,
             password: password
         }
-        console.log(user)
         login(user).then((data) => {
             if(data.status === "OK"){
                 console.log(data)

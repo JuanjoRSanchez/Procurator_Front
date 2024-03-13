@@ -37,7 +37,7 @@ export default function ComponentPlayerToGameBox(props) {
                 console.log("Error")
             }
         })
-        navigate('/gameDetail')
+        navigate(`/gameDetail/${idActualGame}`)
     }
 
     const takeOutPlayerFromGame = () => {

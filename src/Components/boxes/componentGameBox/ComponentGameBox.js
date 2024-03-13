@@ -11,7 +11,7 @@ export default function ComponentGameBox(props) {
     const infoEntity = props.idGame
     const linkToUpdate = '/updateGame/' + props.idGame
     const linkToBack = '/games'
-    const detail = '/gameDetail'
+    const detail = `/gameDetail/${props.idGame}`
     const played_Class = 'body_gameComponentBox played';
     const notPlayed_Class = 'body_gameComponentBox not_played'
     const gameDate = props.gameDate

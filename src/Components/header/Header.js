@@ -15,17 +15,13 @@ export default function Header(){
     let userName = getUserName();
     let helloMessage = `Hello ${userName}`
     const context = useAuth()
-    console.log(context)
     let isAuth = ''
     isAuth = context.isLoggedIn ? "Logout" : "LogIn";
 
     if(isAuth === 'Logout'){
          userIn = true    
     }
-    /*else{
-        logout()
-    }
-    */
+
     const handleLogOut = (e) => {
         e.preventDefault();
         context.setAuthUser({})

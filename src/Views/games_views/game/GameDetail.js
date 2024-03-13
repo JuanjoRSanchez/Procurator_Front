@@ -4,22 +4,23 @@ import './gameDetail.css'
 import '../../../assets/styles/buttons.css'
 import ComponentGameDetail from "../../../Components/boxes/componentGameDetail/ComponentGameDetail";
 import { getPlayersAddedToGame } from "../../../Services/players.service";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ComponentPlayerToGameBox from "../../../Components/boxes/componentPlayerToGameBox/ComponentPlayerToGameBox";
-import { getJwt, getActualIdGame, getActualGame } from "../../../Services/sessionStorage.service";
+import { getJwt, getActualGame } from "../../../Services/sessionStorage.service";
 
 
-export default function Game(props) {
+export default function Game() {
+
+    const { idGame } = useParams()
     const token = getJwt()
     const game = getActualGame()
 
-    const idActualGame = getActualIdGame()
     const [msg, setMsg] = useState('')
 
     const [players, setPlayers] = useState(null)
 
     useEffect(() => {
-        getPlayersAddedToGame(idActualGame, token).then((data) => {
+        getPlayersAddedToGame(idGame, token).then((data) => {
             if(data.length){
                 if(data[0].email){
                     setPlayers(data)                 
@@ -29,7 +30,7 @@ export default function Game(props) {
                 setMsg(`You don't have players on this collective yet `)
             }
         })
-    }, [idActualGame, token])
+    }, [token, idGame])
 
     return (
         <div className='body_principal'>
@@ -60,7 +61,6 @@ export default function Game(props) {
                                 age={player.age}
                                 phone={player.phone}
                                 creationDate={player.creationDate.split('T')[0]}
-                                idCollective={idActualGame}
                                 active={true}
                             />
                 })

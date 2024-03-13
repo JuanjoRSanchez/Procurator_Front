@@ -14,7 +14,7 @@ export default function PlayersToGame(){
 
     const [players, setPlayers] = useState(null)
 
-    useEffect(() => {  
+    useEffect(() => { 
         getPlayersNotAddedToGame(idActualGame, idCollective, token).then((data) => {
             if(data.length  > 0){
                 if(data[0].email){

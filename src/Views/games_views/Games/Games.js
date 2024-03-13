@@ -21,7 +21,9 @@ export default function Games() {
     const [games, setGames] = useState(null);
     const [message, setMessage] = useState('')
     const filters = document.getElementById('filters')
-    
+    if(getActualGame()){
+        sessionStorage.removeItem('game')
+    }
     useEffect(() => {
         getGames(idActualCollective, token).then((data) => {
             if(data.status){
@@ -31,9 +33,7 @@ export default function Games() {
                 setGames(data)
             }
         })
-        if(getActualGame()){
-            sessionStorage.removeItem('game')
-        }
+       
     }, [token, idActualCollective]);
 
     const toggleFilters = () => {
@@ -93,7 +93,7 @@ export default function Games() {
                 games
                 ?
                 Array.from(games).map((game) => {
-                    return <div className='boxComponent_game' to={'/gameDetail'} key={game.id}   > 
+                    return <div className='boxComponent_game' to={`/gameDetail/${game.id}`} key={game.id}   > 
                                     <ComponentGameBox 
                                         key={game.id} 
                                         idGame={game.id}

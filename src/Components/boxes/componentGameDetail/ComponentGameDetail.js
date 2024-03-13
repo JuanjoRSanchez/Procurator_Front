@@ -7,6 +7,7 @@ import '../../../assets/styles/buttons.css'
 import { deleteGame } from "../../../Services/games.services";
 import MessageComponent from "../../messageComponent/MessageComponent";
 import { getJwt, getActualGame } from '../../../Services/sessionStorage.service'
+import { deletePlayerFromGame, getPlayersByGame } from "../../../Services/players.service";
 
 export default function ComponentGameDetail(props) {
 
@@ -16,18 +17,27 @@ export default function ComponentGameDetail(props) {
     const [succes, setSucces] = useState(false);
     const handleDelete = (e) => {
         e.preventDefault();
-       
-        deleteGame(game.idGame, token)
-        .then((value) => {
-            console.log(value)
-            if(value === "200"){
-                setErrMsg("The game has been deleted corectly")
-                setSucces(true)
-            }else{
-                setErrMsg("The game has not been deleted correctly")
-                setSucces(true)
-            }         
-        })       
+        getPlayersByGame(game.idGame, token).then((value) => {
+            if(value.length > 0){
+                for(let prop in value){
+                    deletePlayerFromGame(game.idGame, value[prop].id, token).then((value) => {
+                        if(value === ''){
+                            console.log("Error")
+                        }else{
+                            deleteGame(game.idGame, token).then((value) => {
+                                if(value === "200"){
+                                    setErrMsg("The game has been deleted corectly")
+                                    setSucces(true)
+                                }else{
+                                    setErrMsg("The game has not been deleted correctly")
+                                    setSucces(true)
+                                }         
+                            })
+                        }
+                    })
+                }
+            }
+        });    
     }
 
     return (

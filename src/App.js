@@ -40,7 +40,7 @@ function App() {
                       <Route path='collectiveDetail/:collectiveId' element={<CollectiveDetail />}></Route>
                       <Route path='updateCollective' element={<UpdateCollective />}></Route>
                       <Route path='games' element={<Games />}></Route>
-                      <Route path='gameDetail' element={<Game />}></Route>
+                      <Route path='gameDetail/:idGame' element={<Game />}></Route>
                       <Route path='newGame' element={<NewGame />}></Route>
                       <Route path='updateGame' element={< Updategame/>}></Route>
                       <Route path='players' element={<Players />}></Route>

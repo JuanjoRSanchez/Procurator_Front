@@ -8,7 +8,7 @@ export default function Games(props) {
     const token = getJwt()
     const gameDateRef = useRef();
     
-    const [gameDate, setgameDate] = useState();
+    const [gameDate, setgameDate] = useState(new Date());
     const [errMsg, setErrMsg] = useState(false);
     const [succes, setSucces] = useState(false);
    

@@ -1,6 +1,6 @@
 .form_box {
     width: 50%;
-    min-width: 330px;
+    min-width: 300px;
     max-width: 600px;
     height: auto;
     margin: auto;
@@ -78,3 +78,8 @@ section{
     margin-top: 20px;
 }
 
+@media (max-width: 600px) {
+    .form_box {
+        font-size: 0.7rem;
+    }
+  }
