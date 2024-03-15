@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './Components/header/Header.js'
-import Footer from './Components/footer/Footer.js'
 import Home from './Views/home/Home.js'
 import Login from './Views/login/Login.js'
 import Register from './Views/register/Register.js'
@@ -54,7 +53,6 @@ function App() {
                       <Route path='updateField/:fieldId' element={<UpdateField />}></Route>
                   </Route>                
               </Routes>
-          <Footer />
         </AuthProvider>
     </BrowserRouter>
   );

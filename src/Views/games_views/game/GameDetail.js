@@ -44,7 +44,7 @@ export default function Game() {
                 }           
             </div>  
             <div className='nuevoBox1' >
-                <Link to='/addPlayerToGame'><button  className='btn_showHide'>Add new player</button></Link>
+                <Link to='/addPlayerToGame' className='btn_showHide'>Add new player</Link>
             </div>
             <p className='titulo'>Players added to this game</p>
             <hr />                       

@@ -1,6 +1,7 @@
 import React from "react";
 
 import './boxCollective.css'
+import '../../../assets/styles/buttons.css'
 import { setActualCollective } from "../../../Services/sessionStorage.service";
 
 export default function ComponentGeneralBox(props) {
@@ -10,8 +11,8 @@ export default function ComponentGeneralBox(props) {
     }
     
     return (
-        <div className='body_componentCollective' onClick={setActualCollectiveFrom()}>
-               <p className="titleBox"> {props.title}</p>
+        <div className='anchor' onClick={setActualCollectiveFrom()}>
+               <div className="titleBox"> {props.title}</div>
         </div>
     )
 }

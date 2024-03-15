@@ -18,10 +18,10 @@ export default function CollectiveDetail(props) {
         let btn = document.getElementById('btn_show')
         if(collectiveStyle === 'boxComponent_collective_oculto'){
             setCollectiveStyle('boxComponent_collective_visto')
-            btn.innerHTML = 'Hide collective details'
+            btn.innerHTML = 'Hide details'
         }else{
             setCollectiveStyle('boxComponent_collective_oculto')
-            btn.innerHTML = 'Show collective details'
+            btn.innerHTML = 'Show details'
         }
 
     }
@@ -34,7 +34,7 @@ export default function CollectiveDetail(props) {
                     <p className='title_component'>{collective.name}</p>
             </div>
             <div className='nuevoBox1' >
-                 <button onClick={showCollectiveDetails} id='btn_show' className='btn_showHide'>Show collective details</button>
+                 <button onClick={showCollectiveDetails} id='btn_show' className='btn_showHide'>Show details</button>
             </div>
             <div className={collectiveStyle} id='collective_details'>
                 {
@@ -48,9 +48,16 @@ export default function CollectiveDetail(props) {
             </div>   
             <hr />           
             <div className='caja'>
-                <Link to={'/games'} className='btn_showHide'>Games</Link>
-                <Link to={'/players'} className='btn_showHide'>Players</Link>
-                <Link to={'/fields'} className='btn_showHide'>Fields</Link>
+                <div className='caja-sub1'>
+                    <Link to={'/games'} className='anchor'>Games</Link>
+                </div>
+                <div className='caja-sub1'>
+                    <Link to={'/players'} className='anchor'>Players</Link>
+                </div>
+
+                <div className='caja-sub1'>
+                    <Link to={'/fields'} className='anchor'>Fields</Link>
+                </div>
             </div>
         </div>
     )

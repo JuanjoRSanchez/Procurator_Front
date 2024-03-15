@@ -1,21 +1,19 @@
 .body_principal {
     width: 100%;
     height: auto;
-    padding-top: 80px;
-    padding-bottom: 80px;
     font-size: 20px;
+    font-family: 'Montserrat';
 }
 .body_home {
     width: 100%;
     min-height: 55vh;
     height: auto;
     margin: 0;
-    margin-bottom: 20px;
     display: flex;
     flex-wrap:  wrap;
     align-items: stretch;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    font-family: 'Montserrat';
+    margin-bottom: 100px;
 
 }
 .principal_boxComponent {
@@ -25,7 +23,7 @@
     margin: auto;
     display: flex; 
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-content: space-around;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -35,8 +33,38 @@
     color: aliceblue;
 }
 
+.box-inicial{
+    width: 80%;
+    height: auto;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+.box-inicial-sub1{
+    height: 50px;
+    width: 45%;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .boxComponent_collective {
+    text-decoration: none;
+    color: rgb(24, 73, 119);
+}
+
+.boxComponent_collective:hover {
     text-decoration: none;
     color: rgb(24, 73, 119);
 }
@@ -55,21 +83,16 @@
     width: 50%;
     min-width: 300px;
     height: 30px;
-    border-bottom: 1px solid rgb(255, 254, 254);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    padding-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
-.nuevoBox>a {
-    text-decoration: none;
-    color: rgb(20, 91, 119);
-}
+
 
 .nuevoBox>p {
     text-decoration: none;
@@ -87,15 +110,6 @@
     justify-content: center;
     align-items: center;
 
-}
-.nuevoBox1>a {
-    text-decoration: none;
-    color: rgb(20, 91, 119);
-}
-
-.nuevoBox1>p {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
 }
 
 
@@ -131,6 +145,21 @@ a{
     font-size: 0.8em;
 }
 
+.card-box{
+
+}
+
+.card-data-box{
+    
+}
+
+@media  (max-width: 450px) {
+    
+.anchor{
+    font-size: 1rem;
+
+}
+}
 
 @media  (max-width: 355px) {
     .principal_boxComponent {

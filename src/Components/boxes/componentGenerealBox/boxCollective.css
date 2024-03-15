@@ -1,24 +1,11 @@
 /* Component Box  */
-.body_componentCollective {
-    width: 20%;
-    min-width: 150px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 5px;
-    border-radius: 20px;
-    background-color: rgb(124, 125, 211);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    color: rgb(2, 2, 2);
-    margin: 10px 10px;
-    text-decoration: none;
-}
-
 .titleBox{
     width: 100%;
-   /* border: 1px solid red;*/
     text-align: center;
     color: aliceblue;
     font-size: 0.8rem;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    padding-left: 10px;
+    padding-right: 10px;
 }

@@ -20,7 +20,6 @@ export default function ComponentCollectiveDetail() {
         e.preventDefault()
         deleteCollectiveById(collective.id, token)
             .then((data) => {
-                console.log(data)
                 if(data === 400){
                     errMsg = "Collective not deleted correctly"
                     succes = true
@@ -54,12 +53,14 @@ export default function ComponentCollectiveDetail() {
                     </div>
                 </div>
                 <hr/>
-                <div>
-                    <div className="btn_box">
+                <div className="btn_box">
+                    <div className="btn_box_sub1">
                         <button onClick={handleDelete} className='btn_home'>Delete Collective</button>
+                    </div>
+                    <div className="btn_box_sub1">
                         <button className='btn_home'><Link to={`/updateCollective`}>Update Collective</Link></button>
-                    </div> 
-                </div>
+                    </div>
+                </div> 
             </div> 
         </>
     

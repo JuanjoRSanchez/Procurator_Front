@@ -19,11 +19,20 @@ hr{
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: safe;
+    justify-content: space-around;
 }
 
-
+.caja-sub1{
+    width: 33%;
+    max-width: 300px;
+    min-width: 100px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .boxComponent_collective_visto {
     width: 80%;
@@ -69,3 +78,4 @@ hr{
     font-size: 1.5rem;
     color: aliceblue;
 }
+

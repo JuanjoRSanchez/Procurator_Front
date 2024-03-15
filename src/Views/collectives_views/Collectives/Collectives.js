@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import '../../../assets/styles/principal.css'
 import './collectives.css'
+import '../../../assets/styles/buttons.css'
 import BoxCollective from '../../../Components/boxes/componentGenerealBox/boxCollective.js';
  
 import { Link, useNavigate } from 'react-router-dom'
@@ -34,27 +35,32 @@ export default function Collectives() {
             }
         }) 
         
-        
     }, [tokenn, email, navigate]);
     
     return (
-        <div className='body_home'>        
-                <div className='nuevoBox'>
-                    <Link to={'/newCollective'} >Add new collective</Link>
+        <div className='body_principal'>        
+            <div className='box-inicial'>
+                <div className='box-inicial-sub1'>
+                    <p className='titulo'>Collectives</p>
                 </div>
-                <div className='principal_boxComponent'>
-                    {
-                        collectives
-                        ?
-                        Array.from(collectives).map((collective) => { 
-                            return <Link className='boxComponent_collective' key={collective.id} to={`/collectiveDetail/${collective.id}` }>
-                                        <BoxCollective key={collective.id} title={collective.name} idCollective={collective.id} collective={collective}/>
-                                   </Link>;
-                        })
-                        :
-                        <p>{Msg}</p> 
-                    }              
-                </div>     
+                <div className='box-inicial-sub1'>
+                    <Link to={'/newCollective'} className='btn_add'>Add new collective</Link>
+                </div>
+            </div>
+            <div className='principal_boxComponent'>
+                {
+                    collectives
+                    ?
+                    Array.from(collectives).map((collective) => { 
+                        return <Link className='box-collectiveComponent' key={collective.id} to={`/collectiveDetail/${collective.id}` }>
+                                    <BoxCollective key={collective.id} title={collective.name} idCollective={collective.id} collective={collective}/>
+                                </Link>;
+                    })
+                    :
+                    <p>{Msg}</p> 
+                }              
+            </div>     
         </div>
     )
 }
+

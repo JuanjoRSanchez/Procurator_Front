@@ -32,7 +32,7 @@ export default function PlayersToGame(){
     <div className='body_principal'>   
         <p className='titulo'>Players from this collective</p>
         <hr />                       
-        <div className='boxComponent_collective1'>
+        <div className='principal_boxComponent'>
         {
                 players
                 ?

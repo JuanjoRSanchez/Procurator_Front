@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './players.css'
+import '../../../assets/styles/principal.css'
 import ComponentPlayerBox from '../../../Components/boxes/componentPlayerBox/ComponentPlayerBox'
 import { getPlayersByCollective } from '../../../Services/players.service'
 import { orderPlayersByMajorDate, orderPlayersByMinorDate, showActivePlayers, showNotActivePlayers } from '../../../Services/filters/filterPlayers'
@@ -72,10 +73,12 @@ export default function Players(){
 
     return(
         <div className="body_principal">
-            <div className='collective_games'>
-                <p className='titulo'>Players</p>
-                <div>
-                    <Link to={'/newPlayer'} className='btn_showHide'>Add new player</Link>
+            <div className='box-inicial'>
+                <div className='box-inicial-sub1'>
+                    <p className='titulo'>Players</p>
+                </div>
+                <div className='box-inicial-sub1'>
+                    <Link to={'/newPlayer'} className='btn_add'>Add new player</Link>
                 </div>
             </div>
             <div className='box_filtro'>
@@ -116,3 +119,12 @@ export default function Players(){
         </div>
     )
 }
+
+/*
+<div className='collective_games'>
+    <p className='titulo'>Players</p>
+    <div>
+        <Link to={'/newPlayer'} className='btn_add'>Add new player</Link>
+    </div>
+</div>
+*/

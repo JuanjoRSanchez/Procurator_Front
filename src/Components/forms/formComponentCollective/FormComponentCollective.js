@@ -22,7 +22,6 @@ export default function Partidos() {
         }
 
         addCollective(body, token).then((response) =>{
-            console.log(response)
             if(response === 200){
                 setErrMsg("The collective is saved corectly")
                 setCollectiveName("")

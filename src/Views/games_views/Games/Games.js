@@ -68,14 +68,14 @@ export default function Games() {
 
     return (
         <div className='body_principal'>
-            <div className='collective_games'>
-                <p className='titulo'>Games</p>
-                <div>
-                    <Link to={'/newGame'} className='btn_showHide'>Add new game</Link>
+            <div className='box-inicial'>
+                <div className='box-inicial-sub1'>
+                    <p className='titulo'>Games</p>
+                </div>
+                <div className='box-inicial-sub1'>
+                    <Link to={'/newGame'} className='btn_add'>Add new game</Link>
                 </div>
             </div>
-            <hr />    
-            
             <div className='box_filtro'>
                 <div className='filter_title'>
                     <p className='titulo'>Ordenar por: </p>

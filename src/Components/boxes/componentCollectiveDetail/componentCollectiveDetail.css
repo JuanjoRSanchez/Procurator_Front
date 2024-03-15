@@ -34,15 +34,25 @@
 }
 
 .btn_box{
-    width: 50%;
+    width: 100%;
     margin: auto;
     display: flex;
     justify-content: space-around;
-    
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.btn_box_sub1{
+    width: 50%;
+    min-width: 275px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .titleBox{
     width: 100%;
-   /* border: 1px solid red;*/
     text-align: center;
 }

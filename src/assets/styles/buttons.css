@@ -7,6 +7,15 @@
     border: none;
     background-color: #f4511e;
     color: aliceblue;
+    transition : 1000ms;
+    font-family: 'Montserrat' ;
+}
+
+.submitBtn:hover {
+    width: 100%;
+    border: 1px solid #f4511e;
+    transition : 1000ms;
+
 }
 
 /*----------  buttons -----------*/
@@ -14,48 +23,58 @@
 
 
 /*---------- Home buttons -----------*/
-.btn_home {
+.btn-card{
+    width: 200px;
+    height: 50px;
     display: inline-block;
     border-radius: 4px;
     background-color: #f4511e;
     border: none;
     text-align: center;
     font-size: 28px;
+    font-family: 'Montserrat' ;
     padding: 20px;
-    width: 200px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
     font-size: 1rem;
     color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn_home a {
-    cursor: pointer;
+.btn-card:hover {
+    width: 250px;
+    /*content: '\00bb';*/
+    transition: 0.5s;
+}
+
+.btn_home {
+    width: 200px;
+    height: 50px;
     display: inline-block;
-    position: relative;
-    transition: 0.5s;
-    text-decoration: none;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    text-align: center;
+    font-size: 28px;
+    font-family: 'Montserrat' ;
+    padding: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 1rem;
     color: #FFFFFF;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn_home a:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
+.btn_home:hover {
+    width: 250px;
+    /*content: '\00bb';*/
     transition: 0.5s;
-}
-
-.btn_home:hover a {
-    padding-right: 25px;
-}
-
-.btn_home:hover a:after {
-    opacity: 1;
-    right: 0;
 }
 
 .btn_alert{
@@ -107,7 +126,36 @@
 }
 
 .btn_showHide{
+    width: 50%;
+    height: 40px;
     border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 8px;
+    transition: all 0.5s;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat' ;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_showHide:hover{
+    width: 70%;
+}
+
+.btn_add{
+    width: 50%;
+    border-radius: 4px;
+    max-height: 25px;
     background-color: #f4511e;
     border: none;
     text-align: center;
@@ -121,22 +169,59 @@
     font-size: 1rem;
     color: #FFFFFF;
     text-decoration: none;
-
-}
-.btn_showHide>a{
-    color: #FFFFFF;
-    text-decoration: none;
- 
 }
 
+.btn_add:hover{
+    width: 70%;
+}
 
-.btn_box{
-    width: 80%;
-    margin: auto;
+.btn1{
+    font-weight: 0;
+    font-size: 14px;    
+    font-family: 'Montserrat' ;
+    color: #fff;
+    background: #be005e;
+    padding: 10px 30px;
+    box-shadow: rgb(0, 0, 0, 0.12 ) 5px 5px 0px 0px;
+    border-radius: 5px;
+    border: none;
+    transition : 1000ms;
+    transform: translateY(0);
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
 }
 
+.btn1:hover{
+    transition : 1000ms;
+    padding: 10px 50px;
+    transform : translateY(-0px);
+    background: #9016C1;
+    border: none;
+    color: #c1fff5;
+}
+
+.anchor{
+    width: 75%;
+    height: 50px;
+    /* background-color: #be005e; */
+    border: 1px solid #be005e;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    transition : 1000ms;
+
+}
+
+.anchor:hover{
+    transition : 1000ms;
+    width: 93%;
+    
+}
 
 @media (max-width: 700px) {
     .btn_home {
@@ -153,5 +238,8 @@
         font-size: 0.7rem;
     }
 
+    .btn_showHide{
+        font-size: 0.8rem;
+    }
 }
 

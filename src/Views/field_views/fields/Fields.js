@@ -4,6 +4,8 @@ import { getFieldsByCollectiveId } from '../../../Services/field.service'
 import ComponentFieldDetail from '../../../Components/boxes/componentFieldDetail/ComponentFieldDetail'
 import { getActualCollectiveId, getJwt } from '../../../Services/sessionStorage.service'
 
+import '../../../assets/styles/principal.css'
+
 export default function Fields(){
    
     const idActualCollective = getActualCollectiveId()
@@ -29,13 +31,14 @@ export default function Fields(){
 
     return(
         <div className="body_principal">
-            <div className='collective_games'>
-                <p className='titulo'>Fields</p>
-                <div>
-                    <Link to={'/newField'} className='btn_showHide'>Add new field</Link>
+            <div className='box-inicial'>
+                <div className='box-inicial-sub1'>
+                    <p className='titulo'>Fields</p>
+                </div>
+                <div className='box-inicial-sub1'>
+                    <Link to={'/newField'} className='btn_add'>Add new field</Link>
                 </div>
             </div>
-            <hr />
             <div className='collective_games'>
                 {
                     fields

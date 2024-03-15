@@ -3,7 +3,7 @@ import { login }from '../../../Services/auth/auth.services.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth }  from '../../../context/AuthProvider.js'
 import '../../../assets//styles/forms.css'
-
+import '../../../assets//styles/principal.css'
 
 export default function FormComponentLogin() {
     const navigate = useNavigate();

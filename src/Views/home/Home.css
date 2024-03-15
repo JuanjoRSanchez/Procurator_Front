@@ -1,18 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Russo+One&family=Silkscreen&display=swap');
 
-.body_home {
-    width: 100vh;
-    margin: 0;
-    display: flex;
-    flex-wrap:  wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .box-main-home{
     width: 100%;
     height: auto;
-
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -41,9 +31,6 @@
 .text_content{
     flex: 39%;
     height: 100%;
-
-    color: rgb(255, 255, 255);
-    font: 1em sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,13 +40,24 @@
     width: 90%;
     height: auto;
     color: rgb(255, 255, 255);
-    font: 1em sans-serif;
+    font-size: 1.2em;
     text-align: center;
 
 }
 
 .botonera_home {
-    flex: 100%;
+    flex: 50%;
+    height: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+
+}
+
+.botonera_home-sub1 {
+    flex: 50%;
     height: 40%;
     display: flex;
     justify-content: space-around;
@@ -82,10 +80,12 @@
         min-width: 200px;
     }
 
-
-
     .text_content{
         width: 70%;  
+    }
+
+    .botonera_home-sub1 {
+        flex: 100%;
     }
 }
 

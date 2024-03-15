@@ -4,11 +4,10 @@ import { logout } from "../../Services/auth/auth.services";
 import { useAuth } from '../../context/AuthProvider.js'
 import Logo from '../../assets/images/Logo_Pena.png'
 import './header.css'
+import '../../assets/styles/buttons.css'
 import { getUserName } from "../../Services/sessionStorage.service.js";
 
 export default function Header(){
-    
-
     const navigate = useNavigate();
 
     let userIn = false
@@ -45,10 +44,10 @@ export default function Header(){
                         <p>{helloMessage}</p> <br/>
                     </div>
                     <div className="user_boxLogButton">
-                        <button> <Link to={'/collectives'}>Home</Link></button>
+                        <button className="btn1"> <Link to={'/collectives'}>Home</Link></button>
                     </div>
                     <div className="user_boxLogButton">
-                        <button onClick={handleLogOut}>{isAuth}</button>
+                        <button className="btn1" onClick={handleLogOut}>{isAuth}</button>
                     </div>
                 </div>
                 : 

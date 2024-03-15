@@ -3,7 +3,7 @@ import '../../../assets/styles/principal.css'
 
 import FormComponentCollective from '../../../Components/forms/formComponentCollective/FormComponentCollective.js'
 
-export default function Penas() {
+export default function NewCollective() {
     
     return (
         <div className='body_home'>

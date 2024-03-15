@@ -1,7 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { isAuthenticated } from "../Services/auth/auth.services";
 import { getJwt, getUserEmail, getUserName } from "../Services/sessionStorage.service";
-// import { getJwt } from "../Services/sessionStorage.service";
 
 export const AuthContext = createContext();
 
@@ -20,9 +19,6 @@ export const AuthProvider = ({children}) => {
     const [jwt, setJwt] = useState(getJwt())
 
     useEffect(() => {
-        console.log(sessionStorage.length);
-
-        console.log("Desde Provider")
         if(!isLoggedIn){
             setIsLoggedIn(false)
             setAuthUser(false)

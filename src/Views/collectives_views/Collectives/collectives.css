@@ -1,0 +1,11 @@
+.titulo{
+    height: max-content;
+    width: 45%;
+}
+
+.box-collectiveComponent{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
